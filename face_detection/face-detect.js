@@ -2,6 +2,7 @@ let w, h;
 let model;
 let canvas = document.getElementById("canvas")
 let ctx = canvas.getContext("2d");
+let iter = 0;
 
 tf.setBackend('webgl');
 console.log(tf.getBackend());
@@ -19,6 +20,7 @@ const detectFaces = async () => {
         returnTensors: false,
         flipHorizontal: false,
     });
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     prediction.forEach((pred) => {
@@ -48,11 +50,18 @@ const detectFaces = async () => {
             })
         })
     });
+    iter = iter + 1;
 };
 
 video.addEventListener("loadeddata", async () => {
     model = await faceLandmarksDetection.load(faceLandmarksDetection.SupportedPackages.mediapipeFacemesh);
-    console.log("loaded")
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
+    ctx.rect(0, 0, canvas.width, canvas.height);
+    ctx.fill();
+    ctx.font = "30px Arial";
+    ctx.fillStyle = "white";
+    ctx.fillText("Loading the model...", canvas.width / 2 - 150, canvas.height / 2 + 50);
     setInterval(detectFaces, 100);
 });
 
