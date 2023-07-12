@@ -3,6 +3,9 @@ let model;
 let canvas = document.getElementById("canvas")
 let ctx = canvas.getContext("2d");
 
+tf.setBackend('webgl');
+console.log(tf.getBackend());
+
 // resize the html5 video element
 video.addEventListener(
     "resize",
@@ -10,43 +13,46 @@ video.addEventListener(
     false,
 );
 
-
 const detectFaces = async () => {
-    const prediction = await model.estimateFaces(video, false);
-
-    console.log(canvas.width,  canvas.height)
-    ctx.clearRect(0, 0, canvas.width,  canvas.height);
-
+    const prediction = await model.estimateFaces({
+        input: video,
+        returnTensors: false,
+        flipHorizontal: false,
+    });
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     prediction.forEach((pred) => {
-        console.log(pred)
-        // draw the rectangle enclosing the face
+        // console.log(pred)
+        // draw a bounding box
         ctx.beginPath();
-        ctx.lineWidth = "4";
         ctx.fillStyle = "rgba(0, 0, 255, 0.25)";
-        // the last two arguments are width and height
-        // since blazeface returned only the coordinates,
-        // we can find the width and height by subtracting them.
         ctx.rect(
-            pred.topLeft[0],
-            pred.topLeft[1],
-            pred.bottomRight[0] - pred.topLeft[0],
-            pred.bottomRight[1] - pred.topLeft[1]
+            pred.boundingBox.topLeft[0],
+            pred.boundingBox.topLeft[1],
+            pred.boundingBox.bottomRight[0] - pred.boundingBox.topLeft[0],
+            pred.boundingBox.bottomRight[1] - pred.boundingBox.topLeft[1]
         );
         ctx.fill();
 
-        // drawing small rectangles for the face landmarks
+        // drawing face landmarks
+        const features = ["leftEyeUpper1",  "leftEyeLower1", "rightEyeUpper1", "rightEyeLower1",
+                            "leftEyebrowUpper", "rightEyebrowUpper", "lipsUpperInner", "lipsLowerInner",
+                            "noseTip", "leftCheek", "rightCheek"]
         ctx.fillStyle = "red";
-        pred.landmarks.forEach((landmark) => {
-            ctx.fillRect(landmark[0], landmark[1], 5, 5);
-        });
-
+        features.forEach((feature) => {
+            pred.annotations[feature].forEach(x => {
+                ctx.beginPath();
+                ctx.arc(x[0], x[1], 3, 0, 2 * Math.PI);
+                ctx.closePath();
+                ctx.fill();
+            })
+        })
     });
-
 };
 
 video.addEventListener("loadeddata", async () => {
-    model = await blazeface.load();
+    model = await faceLandmarksDetection.load(faceLandmarksDetection.SupportedPackages.mediapipeFacemesh);
+    console.log("loaded")
     setInterval(detectFaces, 100);
 });
 

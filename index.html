@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Emotion Detection</title>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection@0.0.1/dist/face-landmarks-detection.js"></script>
 </head>
 <body>
 <div id="webcam-component">
@@ -14,5 +14,5 @@
 <!-- TODO add a permission button for the user-->
 </body>
 <script src="face_detection/webcam.js"></script>
-<script src="face_detection/face-detect.js"></script>
+<script type="module" src="face_detection/face-detect.js"></script>
 </html>
