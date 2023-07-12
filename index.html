@@ -7,9 +7,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface"></script>
 </head>
 <body>
-<canvas style="border: 1px solid red"></canvas>
-<video id="webcam" autoplay style="width:auto; height:auto"></video>
-<!-- TODO add a permission button for the user -->
+<div id="webcam-component">
+<canvas id="canvas" style="border: 1px solid red; position: fixed; z-index: 50" ></canvas>
+<video id="webcam" autoplay style="width:auto; height:auto; visibility: hidden"></video>
+</div>
+<!-- TODO add a permission button for the user-->
 </body>
 <script src="face_detection/webcam.js"></script>
 <script src="face_detection/face-detect.js"></script>
