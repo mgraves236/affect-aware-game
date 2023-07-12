@@ -4,4 +4,4 @@ This project is a part of my Master's Thesis. The main idea is to recognize the 
 
 ### What's done so far
 
-The first step is to access the user's webcam and detect their face. For this [Blazeface](https://github.com/tensorflow/tfjs-models/tree/master/blazeface) will be used.
+The first step is to access the user's webcam and detect their face. For this [Face-detction](https://github.com/tensorflow/tfjs-models/tree/master/face-detection) from TensorFlowJS models will be used.
