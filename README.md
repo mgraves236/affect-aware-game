@@ -6,4 +6,7 @@ This project is a part of my Master's Thesis. The main idea is to recognize the 
 
 The first step is to access the user's webcam and detect their face. For this [Face-detction](https://github.com/tensorflow/tfjs-models/tree/master/face-detection) from TensorFlowJS models will be used.
 
-Data augmentation will be done in Python using [Albumentations](https://github.com/albumentations-team/albumentations/activity).
+The model will be trained on [FER-2013](https://www.kaggle.com/datasets/ananthu017/emotion-detection-fer) dataset. The dataset contains 35,685 48x48 pixel grayscale images of faces displaying seven emotions (happiness, neutral, sadness, anger, surprise, disgust, fear). For this project, the model needs to identify only five of them: happiness, neutral, sadness, anger, and fear, reducing the dataset to 25,102 training elements and 6,236 testing images.
+
+Data augmentation will be done in Python using [Albumentations](https://github.com/albumentations-team/albumentations/activity). 
+Each image is resized to the size of 500x500px so that it had a more granulated feel.
