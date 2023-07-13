@@ -5,3 +5,5 @@ This project is a part of my Master's Thesis. The main idea is to recognize the 
 ### What's done so far
 
 The first step is to access the user's webcam and detect their face. For this [Face-detction](https://github.com/tensorflow/tfjs-models/tree/master/face-detection) from TensorFlowJS models will be used.
+
+Data augmentation will be done in Python using [Albumentations](https://github.com/albumentations-team/albumentations/activity).
