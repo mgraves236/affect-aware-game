@@ -38,8 +38,8 @@ const detectFaces = async () => {
 
         // drawing face landmarks
         const features = ["leftEyeUpper1",  "leftEyeLower1", "rightEyeUpper1", "rightEyeLower1",
-                            "leftEyebrowUpper", "rightEyebrowUpper", "lipsUpperInner", "lipsLowerInner",
-                            "noseTip", "leftCheek", "rightCheek"]
+            "leftEyebrowUpper", "rightEyebrowUpper", "lipsUpperInner", "lipsLowerInner",
+            "noseTip", "leftCheek", "rightCheek"]
         ctx.fillStyle = "red";
         features.forEach((feature) => {
             pred.annotations[feature].forEach(x => {
@@ -55,6 +55,8 @@ const detectFaces = async () => {
 
 video.addEventListener("loadeddata", async () => {
     model = await faceLandmarksDetection.load(faceLandmarksDetection.SupportedPackages.mediapipeFacemesh);
+    model_fer = await load();
+    console.log(model_fer)
     ctx.beginPath();
     ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
     ctx.rect(0, 0, canvas.width, canvas.height);
@@ -77,4 +79,8 @@ function videoSize(ev) {
     console.log(h)
     canvas.height = h;
     canvas.width = w;
+}
+
+async function load() {
+    return await tf.loadLayersModel("../model/JSON/model.json");
 }

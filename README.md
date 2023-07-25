@@ -10,3 +10,4 @@ The model will be trained on [FER-2013](https://www.kaggle.com/datasets/ananthu0
 
 Data augmentation will be done in Python using [Albumentations](https://github.com/albumentations-team/albumentations/activity). 
 Each image is resized to the size of 229x229px so that it matches the expected input of the Xception model. Then it is horizontally flipped and Gaussian Blur is added.
+The model achieves 63.87% accuracy on FER-2013 testing dataset.
