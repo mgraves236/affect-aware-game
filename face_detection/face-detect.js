@@ -1,18 +1,11 @@
-let w, h;
 let model;
+let model_fer;
 let canvas = document.getElementById("canvas")
 let ctx = canvas.getContext("2d");
 let iter = 0;
 
 tf.setBackend('webgl');
 console.log(tf.getBackend());
-
-// resize the html5 video element
-video.addEventListener(
-    "resize",
-    videoSize,
-    false,
-);
 
 const detectFaces = async () => {
     const prediction = await model.estimateFaces({
@@ -53,6 +46,7 @@ const detectFaces = async () => {
     iter = iter + 1;
 };
 
+// first frame has been loaded
 video.addEventListener("loadeddata", async () => {
     model = await faceLandmarksDetection.load(faceLandmarksDetection.SupportedPackages.mediapipeFacemesh);
     model_fer = await load();
@@ -67,19 +61,6 @@ video.addEventListener("loadeddata", async () => {
     setInterval(detectFaces, 100);
 });
 
-
-function videoSize(ev) {
-    w = video.videoWidth;
-    h = video.videoHeight;
-
-    if (w && h) {
-        video.style.width = w;
-        video.style.height = h;
-    }
-    console.log(h)
-    canvas.height = h;
-    canvas.width = w;
-}
 
 async function load() {
     return await tf.loadLayersModel("../model/JSON/model.json");

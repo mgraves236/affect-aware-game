@@ -5,14 +5,32 @@
     <title>Emotion Detection</title>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection@0.0.1/dist/face-landmarks-detection.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div id="webcam-component">
-<canvas id="canvas" style="border: 1px solid red; position: fixed; z-index: 50" ></canvas>
-<video id="webcam" autoplay style="width:auto; height:auto;"></video>
-</div>
-<!-- TODO add a permission button for the user-->
+<menu class="bar" id="lang">
+    <li language="english">EN</li>
+    <li language="polish">PL</li>
+</menu>
+<main>
+    <div class="center">
+        <div class="dialog" id="webcam-alert">
+            <h1 id="webcam-head"></h1>
+            <hr>
+            <p id="webcam-desc"></p>
+            <div class="right">
+                <button id="agree"></button>
+                <button id="reject" style="display: none"></button>
+            </div>
+        </div>
+        <div id="webcam-component">
+            <canvas id="canvas"></canvas>
+            <video id="webcam" autoplay></video>
+        </div>
+    </div>
+</main>
 </body>
+<script type="module" src="utils/language.js"></script>
 <script src="face_detection/webcam.js"></script>
-<script src="face_detection/face-detect.js"></script>
+<script type="module" src="face_detection/face-detect.js"></script>
 </html>
