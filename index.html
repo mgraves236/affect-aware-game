@@ -26,11 +26,17 @@
         <div id="webcam-component">
             <canvas id="canvas"></canvas>
             <video id="webcam" autoplay></video>
+            <span id="predict">Prediction: </span>
+            <img id="happy" style="display: none" src="im47.png">
+            <img id="img" src="img.jpg">
+            <canvas style="border: red 1px solid" id="canvas2"></canvas>
+
         </div>
     </div>
 </main>
 </body>
 <script type="module" src="utils/language.js"></script>
-<script src="face_detection/webcam.js"></script>
-<script type="module" src="face_detection/face-detect.js"></script>
+<script src="fer/webcam.js"></script>
+<script type="module" src="main.js"></script>
+<script type="module" src="fer/face-detect.js"></script>
 </html>

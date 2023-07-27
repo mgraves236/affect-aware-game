@@ -90,7 +90,7 @@ button:focus {
 
 #canvas {
     /*border: 1px solid red;*/
-    position: fixed;
+    position: absolute;
     z-index: 50;
     margin: 0.5rem;
 }

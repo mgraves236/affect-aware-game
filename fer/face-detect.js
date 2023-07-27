@@ -1,14 +1,21 @@
-let model;
+import {pred} from "../main.js";
+
 let model_fer;
+let model;
 let canvas = document.getElementById("canvas")
 let ctx = canvas.getContext("2d");
+let canvas2 = document.getElementById("canvas2")
+let ctx2 = canvas.getContext("2d");
 let iter = 0;
+let prediction;
+let textLabel = document.getElementById("predict")
+
+let labels = ["Angry", "Fearful", "Happy", "Neutral", "Sad"]
 
 tf.setBackend('webgl');
-console.log(tf.getBackend());
 
-const detectFaces = async () => {
-    const prediction = await model.estimateFaces({
+async function detectFaces() {
+    prediction = await model.estimateFaces({
         input: video,
         returnTensors: false,
         flipHorizontal: false,
@@ -43,14 +50,31 @@ const detectFaces = async () => {
             })
         })
     });
-    iter = iter + 1;
-};
+    // pred.label = "hello"
+    /*
+    TODO emotion prediction
+     */
+    /*
+    TODO set timer for emotion prediction
+     */
+    requestAnimationFrame(detectFaces);
+    // iter = iter + 1;
+}
 
-// first frame has been loaded
-video.addEventListener("loadeddata", async () => {
+
+export async function setUp() {
     model = await faceLandmarksDetection.load(faceLandmarksDetection.SupportedPackages.mediapipeFacemesh);
     model_fer = await load();
-    console.log(model_fer)
+    // predict
+    let tensor = await processImage('img')
+    const res =  await model_fer.predict(tensor);
+    let predictedValue = res.arraySync();
+    const max = Math.max(...predictedValue[0])
+    const index = predictedValue[0].indexOf(max)
+    const res_label = labels[index]
+    textLabel.innerText = "Prediction: " + res_label;
+    pred.label = res_label
+    //
     ctx.beginPath();
     ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
     ctx.rect(0, 0, canvas.width, canvas.height);
@@ -58,10 +82,17 @@ video.addEventListener("loadeddata", async () => {
     ctx.font = "30px Arial";
     ctx.fillStyle = "white";
     ctx.fillText("Loading the model...", canvas.width / 2 - 150, canvas.height / 2 + 50);
-    setInterval(detectFaces, 100);
-});
 
+   await detectFaces();
+}
 
 async function load() {
     return await tf.loadLayersModel("../model/JSON/model.json");
+}
+
+async function processImage(img) {
+    let tensor = await tf.browser.fromPixels(document.getElementById(img))
+    tensor = tf.image.resizeBilinear(tensor, [229, 229]).mean(2).toFloat().div(tf.scalar(255));
+    tf.browser.toPixels(tensor, canvas2);
+    return tensor.expandDims(0).expandDims(-1);
 }

@@ -1,5 +1,6 @@
 let video = document.getElementById("webcam");
 let modal = document.getElementById("webcam-alert");
+let w, h;
 
 video.addEventListener(
     "resize",
