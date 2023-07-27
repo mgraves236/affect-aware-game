@@ -14,4 +14,4 @@ The model achieves 63.87% accuracy on FER-2013 testing dataset.
 The trained Xception network was converted into json file with [tfjs-converter](https://github.com/tensorflow/tfjs/tree/master/tfjs-converter).
 
 #### JavaScript implementation
-The first step is to access the user's webcam and detect their face. For this [Face-detction](https://github.com/tensorflow/tfjs-models/tree/master/face-detection) from TensorFlowJS models is be used.
+The first step is to access the user's webcam and detect their face. For this [Face-detction](https://github.com/tensorflow/tfjs-models/tree/master/face-detection) from TensorFlowJS models is used.
