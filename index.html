@@ -11,9 +11,12 @@
 <menu class="bar" id="lang">
     <li language="english">EN</li>
     <li language="polish">PL</li>
+    <li>
+        <input type="checkbox" id="show-video" name="show-video" value="true" onclick="showVideo()" checked>
+        <label for="show-video" id="show-video-label" onclick="showVideo()">Show video</label></li>
 </menu>
 <main>
-    <div class="center">
+    <div class="center" style="position: fixed; z-index: 51;">
         <div class="dialog" id="webcam-alert">
             <h1 id="webcam-head"></h1>
             <hr>

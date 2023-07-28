@@ -1,5 +1,5 @@
-import {pred} from "../main.js";
-import {labels} from "../main.js";
+import {pred, labels, labelsPl} from "../main.js";
+import {attr} from "../utils/language.js";
 
 let model_fer;
 let model;
@@ -11,7 +11,7 @@ let textLabel = document.getElementById("predict")
 // variables to measure time between predictions
 let start = 0;
 let end = 0;
-let time_skip = 2 * 1000; // s
+let time_skip = 1 * 1000; // s
 let time = time_skip;
 
 tf.setBackend('webgl');
@@ -115,17 +115,27 @@ async function predictEmotion(img) {
     // only get predictions that are almost certain
     if (max >= 0.50) {
         const index = predictedValue[0].indexOf(max)
-        res_label = index
+        res_label = index;
     }
     return res_label;
 }
 
 export function displayEmotion(arr) {
-    let string = "Prediction:\n"
-    let iter = 0;
-    arr.forEach((emotion) => {
-        string = string + "Face " + iter + " " + labels[emotion] + "\n";
-        iter = iter + 1;
-    })
+    console.log(attr)
+    let iter = 1;
+    let string;
+    if (attr === "english") {
+        string = "Prediction:\n"
+        arr.forEach((emotion) => {
+            string = string + "Face #" + iter + ": " + labels[emotion] + "\n";
+            iter = iter + 1;
+        });
+    } else if (attr === "polish") {
+        string = "Emocja:\n"
+        arr.forEach((emotion) => {
+            string = string + "Twarz #" + iter + ": " + labelsPl[emotion] + "\n";
+            iter = iter + 1;
+        });
+    }
     textLabel.innerText = string;
 }

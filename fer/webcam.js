@@ -1,6 +1,8 @@
 let video = document.getElementById("webcam");
 let modal = document.getElementById("webcam-alert");
 let w, h;
+let checkbox = document.getElementById("show-video");
+let webcamComponent = document.getElementById("webcam-component");
 
 video.addEventListener(
     "resize",
@@ -9,8 +11,6 @@ video.addEventListener(
 );
 
 document.getElementById("agree").addEventListener('click', closeModal)
-
-// openModal();
 setupCamera();
 
 function setupCamera() {
@@ -50,4 +50,15 @@ function videoSize(ev) {
     }
     canvas.height = h;
     canvas.width = w;
+}
+
+// show video on page
+function showVideo() {
+    if (checkbox.checked === true) {
+        webcamComponent.style.visibility = "visible";
+
+    } else {
+        webcamComponent.style.visibility = "hidden";
+    }
+
 }

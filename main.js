@@ -2,6 +2,7 @@ import {setUp} from "./fer/face-detect.js";
 import {displayEmotion} from "./fer/face-detect.js";
 
 export const labels = ["Angry", "Fearful", "Happy", "Neutral", "Sad"]
+export const labelsPl = ["Złość", "Strach", "Szczęście", "Neutralność", "Smutek"]
 
 export const pred = {
     valueArr: [],
@@ -22,8 +23,6 @@ export const pred = {
 };
 
 // listen for new predictions
-// pred.registerNewListener((val) => console.log(`New value: ${val}`));
-// pred.registerNewListener((val) => console.log(pred.label));
 pred.registerNewListener((val) => displayEmotion(pred.label));
 
 // first frame has been loaded
