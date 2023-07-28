@@ -4,16 +4,22 @@ import {labels} from "../main.js";
 let model_fer;
 let model;
 let canvas = document.getElementById("canvas")
-let ctx = canvas.getContext("2d", { willReadFrequently: true });
-let iter = 0;
+let ctx = canvas.getContext("2d", {willReadFrequently: true});
 let prediction;
 let textLabel = document.getElementById("predict")
 
+// variables to measure time between predictions
+let start = 0;
+let end = 0;
+let time_skip = 2 * 1000; // s
+let time = time_skip;
 
 tf.setBackend('webgl');
 
 // detect all faces in the frame and recognize emotions
 async function detectFaces() {
+    start = performance.now();
+    // remove previous predictions
     prediction = await model.estimateFaces({
         input: video,
         returnTensors: false,
@@ -26,42 +32,53 @@ async function detectFaces() {
         0, 0, canvas.width, canvas.height,
         0, 0, canvas.width, canvas.height
     );
-    prediction.forEach((pred) => {
+    prediction.forEach((pred_face) => {
         // console.log(pred)
         // draw a bounding box
         ctx.beginPath();
         ctx.fillStyle = "rgba(0, 0, 255, 0.25)";
         ctx.rect(
-            pred.boundingBox.topLeft[0],
-            pred.boundingBox.topLeft[1],
-            pred.boundingBox.bottomRight[0] - pred.boundingBox.topLeft[0],
-            pred.boundingBox.bottomRight[1] - pred.boundingBox.topLeft[1]
+            pred_face.boundingBox.topLeft[0],
+            pred_face.boundingBox.topLeft[1],
+            pred_face.boundingBox.bottomRight[0] - pred_face.boundingBox.topLeft[0],
+            pred_face.boundingBox.bottomRight[1] - pred_face.boundingBox.topLeft[1]
         );
         ctx.fill();
 
         // drawing face landmarks
-        const features = ["leftEyeUpper1",  "leftEyeLower1", "rightEyeUpper1", "rightEyeLower1",
+        const features = ["leftEyeUpper1", "leftEyeLower1", "rightEyeUpper1", "rightEyeLower1",
             "leftEyebrowUpper", "rightEyebrowUpper", "lipsUpperInner", "lipsLowerInner",
             "noseTip", "leftCheek", "rightCheek"]
         ctx.fillStyle = "red";
         features.forEach((feature) => {
-            pred.annotations[feature].forEach(x => {
+            pred_face.annotations[feature].forEach(x => {
                 ctx.beginPath();
                 ctx.arc(x[0], x[1], 3, 0, 2 * Math.PI);
                 ctx.closePath();
                 ctx.fill();
             })
         })
-        if (iter%25 === 0) {
-            const imgData = ctx.getImageData(pred.boundingBox.topLeft[0],
-                pred.boundingBox.topLeft[1],
-                pred.boundingBox.bottomRight[0] - pred.boundingBox.topLeft[0],
-                pred.boundingBox.bottomRight[1] - pred.boundingBox.topLeft[1]);
-            predictEmotion(imgData);
+        // predict emotion every time_skip milliseconds
+        if (time >= time_skip) {
+            time = 0;
+            pred.remove();
+            const imgData = ctx.getImageData(pred_face.boundingBox.topLeft[0],
+                pred_face.boundingBox.topLeft[1],
+                pred_face.boundingBox.bottomRight[0] - pred_face.boundingBox.topLeft[0],
+                pred_face.boundingBox.bottomRight[1] - pred_face.boundingBox.topLeft[1]);
+
+            const emoRes = async () => {
+                const a = await predictEmotion(imgData);
+                if (a !== 0) {
+                    pred.label = a
+                }
+            };
+            emoRes();
         }
     });
     requestAnimationFrame(detectFaces);
-    iter = iter + 1;
+    end = performance.now();
+    time = time + end - start;
 }
 
 
@@ -76,7 +93,7 @@ export async function setUp() {
     ctx.fillStyle = "white";
     ctx.fillText("Loading the model...", canvas.width / 2 - 150, canvas.height / 2 + 50);
 
-   await detectFaces();
+    await detectFaces();
 }
 
 async function load() {
@@ -90,16 +107,25 @@ async function processImage(img) {
 }
 
 async function predictEmotion(img) {
-    pred.remove();
+    let res_label = 0;
     let tensor = await processImage(img)
-    const res =  await model_fer.predict(tensor);
+    const res = await model_fer.predict(tensor);
     let predictedValue = res.arraySync();
     const max = Math.max(...predictedValue[0])
     // only get predictions that are almost certain
-    if (max >= 0.85) {
+    if (max >= 0.50) {
         const index = predictedValue[0].indexOf(max)
-        const res_label = labels[index]
-        textLabel.innerText = "Prediction: " + res_label;
-        pred.label = res_label;
+        res_label = index
     }
+    return res_label;
+}
+
+export function displayEmotion(arr) {
+    let string = "Prediction:\n"
+    let iter = 0;
+    arr.forEach((emotion) => {
+        string = string + "Face " + iter + " " + labels[emotion] + "\n";
+        iter = iter + 1;
+    })
+    textLabel.innerText = string;
 }
