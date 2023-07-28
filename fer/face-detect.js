@@ -1,28 +1,31 @@
 import {pred} from "../main.js";
+import {labels} from "../main.js";
 
 let model_fer;
 let model;
 let canvas = document.getElementById("canvas")
-let ctx = canvas.getContext("2d");
-let canvas2 = document.getElementById("canvas2")
-let ctx2 = canvas.getContext("2d");
+let ctx = canvas.getContext("2d", { willReadFrequently: true });
 let iter = 0;
 let prediction;
 let textLabel = document.getElementById("predict")
 
-let labels = ["Angry", "Fearful", "Happy", "Neutral", "Sad"]
 
 tf.setBackend('webgl');
 
+// detect all faces in the frame and recognize emotions
 async function detectFaces() {
     prediction = await model.estimateFaces({
         input: video,
         returnTensors: false,
         flipHorizontal: false,
     });
-
+    // console.log(prediction)
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+    ctx.drawImage(
+        video,
+        0, 0, canvas.width, canvas.height,
+        0, 0, canvas.width, canvas.height
+    );
     prediction.forEach((pred) => {
         // console.log(pred)
         // draw a bounding box
@@ -49,32 +52,22 @@ async function detectFaces() {
                 ctx.fill();
             })
         })
+        if (iter%25 === 0) {
+            const imgData = ctx.getImageData(pred.boundingBox.topLeft[0],
+                pred.boundingBox.topLeft[1],
+                pred.boundingBox.bottomRight[0] - pred.boundingBox.topLeft[0],
+                pred.boundingBox.bottomRight[1] - pred.boundingBox.topLeft[1]);
+            predictEmotion(imgData);
+        }
     });
-    // pred.label = "hello"
-    /*
-    TODO emotion prediction
-     */
-    /*
-    TODO set timer for emotion prediction
-     */
     requestAnimationFrame(detectFaces);
-    // iter = iter + 1;
+    iter = iter + 1;
 }
 
 
 export async function setUp() {
     model = await faceLandmarksDetection.load(faceLandmarksDetection.SupportedPackages.mediapipeFacemesh);
     model_fer = await load();
-    // predict
-    let tensor = await processImage('img')
-    const res =  await model_fer.predict(tensor);
-    let predictedValue = res.arraySync();
-    const max = Math.max(...predictedValue[0])
-    const index = predictedValue[0].indexOf(max)
-    const res_label = labels[index]
-    textLabel.innerText = "Prediction: " + res_label;
-    pred.label = res_label
-    //
     ctx.beginPath();
     ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
     ctx.rect(0, 0, canvas.width, canvas.height);
@@ -91,8 +84,22 @@ async function load() {
 }
 
 async function processImage(img) {
-    let tensor = await tf.browser.fromPixels(document.getElementById(img))
+    let tensor = await tf.browser.fromPixels(img)
     tensor = tf.image.resizeBilinear(tensor, [229, 229]).mean(2).toFloat().div(tf.scalar(255));
-    tf.browser.toPixels(tensor, canvas2);
     return tensor.expandDims(0).expandDims(-1);
+}
+
+async function predictEmotion(img) {
+    pred.remove();
+    let tensor = await processImage(img)
+    const res =  await model_fer.predict(tensor);
+    let predictedValue = res.arraySync();
+    const max = Math.max(...predictedValue[0])
+    // only get predictions that are almost certain
+    if (max >= 0.85) {
+        const index = predictedValue[0].indexOf(max)
+        const res_label = labels[index]
+        textLabel.innerText = "Prediction: " + res_label;
+        pred.label = res_label;
+    }
 }

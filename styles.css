@@ -10,6 +10,10 @@ html {
 }
 
 body {
+    /*layout*/
+    display: flex;
+    flex-direction: column;
+    object-fit: none;
     height:100%;
     margin: 0;
     padding: 0;
@@ -18,8 +22,8 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     line-height: 1.5em;
-    display: flex;
-    flex-direction: column;
+    /*background*/
+    /*background-color: black;*/
 }
 
 .bar {
@@ -81,6 +85,13 @@ button:focus {
 .center {
     display: flex;
     justify-content: space-around;
+    flex-grow: 0;
+}
+
+.start {
+    display: flex;
+    justify-content: flex-start;
+    flex-grow: 0;
 }
 
 .right {
@@ -88,23 +99,45 @@ button:focus {
     justify-content: right;
 }
 
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
 #canvas {
-    /*border: 1px solid red;*/
+    border: 1px solid red;
     position: absolute;
     z-index: 50;
     margin: 0.5rem;
+    width: auto;
+    height: 40vh;
+}
+
+#game-canvas {
+    height: 90vh;
+    width: 90vh;
 }
 
 #webcam {
-    width:auto;
-    height:auto;
+    width: auto;
+    height: 40vh;
     margin: 0.5rem;
-    min-height: 45vh;
 }
 
 
 @media only screen and (max-width: 900px) {
     .dialog {
         width: 80%;
+    }
+
+    #game-canvas {
+        height: 70vw;
+        width: 70vw;
+    }
+
+    #webcam, #canvas {
+        width: auto;
+        height: 15vw;
     }
 }

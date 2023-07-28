@@ -23,15 +23,14 @@
                 <button id="reject" style="display: none"></button>
             </div>
         </div>
-        <div id="webcam-component">
+    </div>
+    <div class="start">
+        <div id="webcam-component" class="column">
             <canvas id="canvas"></canvas>
-            <video id="webcam" autoplay></video>
+            <video style="visibility: hidden" id="webcam" autoplay></video>
             <span id="predict">Prediction: </span>
-            <img id="happy" style="display: none" src="im47.png">
-            <img id="img" src="img.jpg">
-            <canvas style="border: red 1px solid" id="canvas2"></canvas>
-
         </div>
+        <canvas style="border: 1px solid purple" id="game-canvas"></canvas>
     </div>
 </main>
 </body>
@@ -39,4 +38,5 @@
 <script src="fer/webcam.js"></script>
 <script type="module" src="main.js"></script>
 <script type="module" src="fer/face-detect.js"></script>
+<script type="module" src="game/game.js"></script>
 </html>
