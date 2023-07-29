@@ -10,11 +10,10 @@ video.addEventListener(
     false,
 );
 
-document.getElementById("agree").addEventListener('click', closeModal)
-setupCamera();
+document.getElementById("agree").addEventListener('click', closeModal);
+document.getElementById("show-video-component").addEventListener('click', showVideo);
 
 function setupCamera() {
-
     navigator.mediaDevices.getUserMedia(
         {
             audio: false,
@@ -56,9 +55,7 @@ function videoSize(ev) {
 function showVideo() {
     if (checkbox.checked === true) {
         webcamComponent.style.visibility = "visible";
-
     } else {
         webcamComponent.style.visibility = "hidden";
     }
-
 }

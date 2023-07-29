@@ -1,7 +1,7 @@
 import data from './content.json' assert { type: 'json' };
 
 let defaultLanguage = "english";
-let langBar = document.getElementById("lang");
+let langBar = document.querySelectorAll(".lang");
 export let attr = defaultLanguage;
 // export const attr = {
 //    value: defaultLanguage,
@@ -23,8 +23,10 @@ export let attr = defaultLanguage;
 
 
 changeLang(defaultLanguage);
-
-langBar.addEventListener('click', handleLang);
+console.log(langBar)
+langBar.forEach(lang => {
+   lang.addEventListener('click', handleLang);
+});
 
 function changeLang(language) {
    document.getElementById("show-video-label").innerText = data[language]["show-video"];
@@ -36,6 +38,8 @@ function changeLang(language) {
 
 function handleLang(event) {
    attr = event.target.getAttribute("language");
+   console.log(attr)
+
    if (attr) {
       changeLang(attr);
    }

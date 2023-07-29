@@ -33,7 +33,6 @@ async function detectFaces() {
         0, 0, canvas.width, canvas.height
     );
     prediction.forEach((pred_face) => {
-        // console.log(pred)
         // draw a bounding box
         ctx.beginPath();
         ctx.fillStyle = "rgba(0, 0, 255, 0.25)";
@@ -83,6 +82,14 @@ async function detectFaces() {
 
 
 export async function setUp() {
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
+    ctx.rect(0, 0, canvas.width, canvas.height);
+    ctx.fill();
+    ctx.font = "30px Arial";
+    ctx.fillStyle = "white";
+    ctx.fillText("Loading the model...", canvas.width / 2 - 150, canvas.height / 2 + 50);
+
     model = await faceLandmarksDetection.load(faceLandmarksDetection.SupportedPackages.mediapipeFacemesh);
     model_fer = await load();
     ctx.beginPath();
@@ -92,6 +99,7 @@ export async function setUp() {
     ctx.font = "30px Arial";
     ctx.fillStyle = "white";
     ctx.fillText("Loading the model...", canvas.width / 2 - 150, canvas.height / 2 + 50);
+    console.log("hello2")
 
     await detectFaces();
 }
@@ -121,9 +129,9 @@ async function predictEmotion(img) {
 }
 
 export function displayEmotion(arr) {
-    console.log(attr)
     let iter = 1;
     let string;
+    console.log(attr)
     if (attr === "english") {
         string = "Prediction:\n"
         arr.forEach((emotion) => {
@@ -137,5 +145,7 @@ export function displayEmotion(arr) {
             iter = iter + 1;
         });
     }
+    console.log(string)
     textLabel.innerText = string;
 }
+
