@@ -3,27 +3,8 @@ import data from './content.json' assert { type: 'json' };
 let defaultLanguage = "english";
 let langBar = document.querySelectorAll(".lang");
 export let attr = defaultLanguage;
-// export const attr = {
-//    value: defaultLanguage,
-//    get lang() {
-//       return this.value;
-//    },
-//    set lang(val) {
-//       this.value = val;
-//       this.langListener(val);
-//    },
-//    langListener: function (val) {},
-//    registerNewListener: function (externalListenerFunction) {
-//       this.langListener = externalListenerFunction;
-//    },
-// };
-//
-// // listen for new predictions
-// attr.registerNewListener((val) => console.log(val));
-
 
 changeLang(defaultLanguage);
-console.log(langBar)
 langBar.forEach(lang => {
    lang.addEventListener('click', handleLang);
 });
@@ -33,13 +14,12 @@ function changeLang(language) {
    document.getElementById("webcam-head").innerText = data[language]["webcam-head"];
    document.getElementById("webcam-desc").innerText = data[language]["webcam-desc"];
    document.getElementById("agree").innerText = data[language]["agree"];
+   document.getElementById("enable-emotion-label").innerText = data[language]["enable-emotion"];
    // document.getElementById("reject").innerText = data[language]["reject"];
 }
 
 function handleLang(event) {
    attr = event.target.getAttribute("language");
-   console.log(attr)
-
    if (attr) {
       changeLang(attr);
    }

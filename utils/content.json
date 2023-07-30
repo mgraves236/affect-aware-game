@@ -4,13 +4,15 @@
     "webcam-desc": "A webcam is required to fully experience the app. It will not work without the access. The video is not sent to a remote server, every computation is done within your web browser. Grant access to the webcam and enjoy the game with full privacy! Allow the webcam in your web browser's settings.",
     "agree": "OK",
     "reject": "Reject",
-    "show-video": "Show video"
+    "show-video": "Show video",
+    "enable-emotion": "Enable dynamic difficulty"
   },
   "polish": {
     "webcam-head": "Zezwolić na dostęp do kamery?",
     "webcam-desc": "Aplikacja wymaga użycia kamery do poprawnego działania. Obraz nie jest wysyłany na serwer zewnętrzny, wszystkie wymagane działania realizowane są w przeglądarce internetowej. Zewzól na dostęp do kamery i graj z zachowaniem całkowitej prywatności! Zmień dostęp w ustawieniach przeglądarki.",
     "agree": "Akceptuj",
     "reject": "Odrzuć",
-    "show-video": "Pokaż podgląd"
+    "show-video": "Pokaż podgląd",
+    "enable-emotion": "Włącz dynamiczny poziom trudności"
   }
 }

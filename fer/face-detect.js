@@ -19,19 +19,20 @@ tf.setBackend('webgl');
 // detect all faces in the frame and recognize emotions
 async function detectFaces() {
     start = performance.now();
-    // remove previous predictions
     prediction = await model.estimateFaces({
         input: video,
         returnTensors: false,
         flipHorizontal: false,
     });
-    // console.log(prediction)
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(
         video,
         0, 0, canvas.width, canvas.height,
         0, 0, canvas.width, canvas.height
     );
+
+    // remove previous predictions
+    if (time >= time_skip) pred.remove();
     prediction.forEach((pred_face) => {
         // draw a bounding box
         ctx.beginPath();
@@ -60,7 +61,7 @@ async function detectFaces() {
         // predict emotion every time_skip milliseconds
         if (time >= time_skip) {
             time = 0;
-            pred.remove();
+
             const imgData = ctx.getImageData(pred_face.boundingBox.topLeft[0],
                 pred_face.boundingBox.topLeft[1],
                 pred_face.boundingBox.bottomRight[0] - pred_face.boundingBox.topLeft[0],
@@ -99,7 +100,6 @@ export async function setUp() {
     ctx.font = "30px Arial";
     ctx.fillStyle = "white";
     ctx.fillText("Loading the model...", canvas.width / 2 - 150, canvas.height / 2 + 50);
-    console.log("hello2")
 
     await detectFaces();
 }
@@ -131,7 +131,6 @@ async function predictEmotion(img) {
 export function displayEmotion(arr) {
     let iter = 1;
     let string;
-    console.log(attr)
     if (attr === "english") {
         string = "Prediction:\n"
         arr.forEach((emotion) => {
