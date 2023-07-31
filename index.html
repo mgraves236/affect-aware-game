@@ -38,7 +38,7 @@
             <video style="visibility: hidden" id="webcam" autoplay></video>
             <span id="predict">Prediction: </span>
         </div>
-        <canvas style="border: 1px solid purple" id="game-canvas"></canvas>
+        <canvas id="game-canvas"></canvas>
     </div>
 </main>
 </body>
@@ -46,5 +46,16 @@
 <script src="fer/webcam.js"></script>
 <script type="module" src="main.js"></script>
 <script type="module" src="fer/face-detect.js"></script>
+<!-- game engine modules-->
+<script type='module' src='game/engineCore/screen.js'></script>
+<script type='module' src='game/engineCore/core.js'></script>
+<script type='module' src='game/engineCore/physics.js'></script>
+<script type='module' src='game/engineCore/loop.js'></script>
+<script type='module' src='game/lib/vector.js'></script>
+<script type='module' src='game/lib/collisionInfo.js'></script>
+<script type='module' src='game/rigidBody/rigidShape.js'></script>
+<script type='module' src='game/rigidBody/rectangle.js'></script>
+<script type='module' src='game/rigidBody/triangle.js'></script>
+<script type='module' src='game/rigidBody/circle.js'></script>
 <script type="module" src="game/game.js"></script>
 </html>
