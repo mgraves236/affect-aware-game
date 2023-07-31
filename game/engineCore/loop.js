@@ -21,7 +21,12 @@ export function mainGame(currentTime) {
     screen.mContext.clearRect(0, 0, screen.mWidth, screen.mHeight);
     screen.mContext.fillStyle = "rgba(0,0,0,1)";
     screen.mContext.fillRect(0,0, screen.mWidth, screen.mHeight);
-    // update drag areas
+    // draw net
+    screen.mContext.fillStyle = "rgba(255,255,255,0.65)";
+
+    for(let i = 0; i < 12; i++)
+    screen.mContext.fillRect(screen.mCanvas.height / 2 - 5, 87 * i, 10, 30);
+
 
     if (Engine.Core.mAllObjects !== null) {
         // update and display or delete object

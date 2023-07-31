@@ -33,6 +33,7 @@ async function detectFaces() {
 
     // remove previous predictions
     if (time >= time_skip) pred.remove();
+    console.log(prediction)
     prediction.forEach((pred_face) => {
         // draw a bounding box
         ctx.beginPath();
@@ -60,8 +61,8 @@ async function detectFaces() {
         })
         // predict emotion every time_skip milliseconds
         if (time >= time_skip) {
-            time = 0;
-
+            console.log(pred_face)
+            console.log('hello')
             const imgData = ctx.getImageData(pred_face.boundingBox.topLeft[0],
                 pred_face.boundingBox.topLeft[1],
                 pred_face.boundingBox.bottomRight[0] - pred_face.boundingBox.topLeft[0],
@@ -69,6 +70,7 @@ async function detectFaces() {
 
             const emoRes = async () => {
                 const a = await predictEmotion(imgData);
+                console.log("a: ", a);
                 if (a !== 0) {
                     pred.label = a
                 }
@@ -78,6 +80,9 @@ async function detectFaces() {
     });
     requestAnimationFrame(detectFaces);
     end = performance.now();
+    if (time >= time_skip) {
+        time = 0;
+    }
     time = time + end - start;
 }
 
@@ -131,6 +136,7 @@ async function predictEmotion(img) {
 export function displayEmotion(arr) {
     let iter = 1;
     let string;
+    console.log(arr)
     if (attr === "english") {
         string = "Prediction:\n"
         arr.forEach((emotion) => {

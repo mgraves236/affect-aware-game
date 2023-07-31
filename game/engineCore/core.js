@@ -17,6 +17,8 @@ Engine.Core = undefined;
  */
 Engine.Physics = undefined;
 
+Engine.Score = {player: 0, computer: 0};
+Engine.EndGame = false;
 
 /**
  * Initialize engine core
