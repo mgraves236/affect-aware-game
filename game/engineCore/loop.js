@@ -1,7 +1,7 @@
 import {Engine} from "./core.js";
 import {screen} from "./screen.js";
 import {Vector} from "../lib/vector.js";
-
+import {drawScore} from "../game.js";
 
 
 let lastRenderTime = 0;
@@ -25,8 +25,10 @@ export function mainGame(currentTime) {
     // draw net
     screen.mContext.fillStyle = "rgba(255,255,255,0.65)";
     for(let i = 0; i < 12; i++)
-    screen.mContext.fillRect(screen.mCanvas.height / 2 - 5, 87 * i, 10, 30);
+    screen.mContext.fillRect(screen.mCanvas.width / 2 - 5, 50 * i, 10, 30);
 
+    // update UI
+    drawScore();
     if (Engine.Core.mAllObjects !== null) {
         // update and display or delete object
         let start = new Date().getTime();

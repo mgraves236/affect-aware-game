@@ -10,7 +10,7 @@ let screen = (function () {
     let mCanvas = document.getElementById('game-canvas');
     let mContext = mCanvas.getContext('2d');
     // console.log(mCanvas.height)
-    mCanvas.height = 900;
+    mCanvas.height = 450;
     mCanvas.width = 900;
 
     /**
@@ -21,8 +21,8 @@ let screen = (function () {
     // infinite mass -- mass = 0
     let top = new Rectangle(0, new Vector(x / 2, -5), x, 10, 0, 0, 1, false, "border");
     let bottom = new Rectangle(0, new Vector(x / 2, y + 5), x, 10, 0, 0, 1, false, "border");
-    let left = new Rectangle(0, new Vector(-5, y / 2), 10, y, 0, 0, 1, false, "border");
-    let right = new Rectangle(0, new Vector(x + 5, y / 2), 10, y, 0, 0, 1, false, "border");
+    let left = new Rectangle(0, new Vector(-5, y / 2), 10, y, 0, 0, 1, false, "border-left");
+    let right = new Rectangle(0, new Vector(x + 5, y / 2), 10, y, 0, 0, 1, false, "border-right");
 
     return {
         mWidth: mCanvas.width,

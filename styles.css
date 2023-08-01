@@ -131,7 +131,7 @@ button:focus {
 }
 
 #game-canvas {
-    height: 90vh;
+    height: 45vh;
     width: 90vh;
 }
 
@@ -148,7 +148,7 @@ button:focus {
     }
 
     #game-canvas {
-        height: 70vw;
+        height: 35vw;
         width: 70vw;
     }
 

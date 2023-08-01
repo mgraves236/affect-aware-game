@@ -31,8 +31,21 @@ let _enginePhysics = (function () {
                                 // collision detection with SAT
                                 if (Engine.Core.mAllObjects[i].collisionTest(Engine.Core.mAllObjects[j], collisionInfo)) {
 
-                                    // the normal must always be from object i to object j
-                                    let center = Engine.Core.mAllObjects[j].massCenter.subtract(Engine.Core.mAllObjects[i].massCenter);
+                                    // check if ball hit any of the players' sides
+                                    if (Engine.Core.mAllObjects[j].additionalInfo === "ball") {
+                                        if (Engine.Core.mAllObjects[i].additionalInfo === "border-left") { // player scored
+                                            Engine.Score.player += 1;
+                                            Engine.Ball.reset();
+                                        } else if (Engine.Core.mAllObjects[i].additionalInfo === "border-right") { // player scored
+                                            Engine.Score.computer += 1;
+                                            Engine.Ball.reset();
+
+                                        }
+
+                                    }
+
+                                        // the normal must always be from object i to object j
+                                        let center = Engine.Core.mAllObjects[j].massCenter.subtract(Engine.Core.mAllObjects[i].massCenter);
                                     if (collisionInfo.normal.dot(center) < 0) {
                                         collisionInfo.changeDirection();
                                     }
@@ -45,8 +58,8 @@ let _enginePhysics = (function () {
                                     // ctx.restore();
 
                                     // resolve collision
-                                   resolveCollision(Engine.Core.mAllObjects[i],
-                                       Engine.Core.mAllObjects[j], collisionInfo)
+                                    resolveCollision(Engine.Core.mAllObjects[i],
+                                        Engine.Core.mAllObjects[j], collisionInfo)
                                 }
                             }
                         }
@@ -188,11 +201,11 @@ let _enginePhysics = (function () {
     /**
      * Add drag to objects if they are in a drag area
      */
-    let drag = function() {
+    let drag = function () {
         /**
          * Change Rigid Shape velocity due to drag
          */
-        for(let j = 0; j < Engine.Core.mAllObjects.length; j++) {
+        for (let j = 0; j < Engine.Core.mAllObjects.length; j++) {
             for (let i = 0; i < Engine.Core.mDragAreas.length; i++) {
                 let area = Engine.Core.mDragAreas[i];
                 if (isInside(area, Engine.Core.mAllObjects[j])) {
@@ -202,14 +215,14 @@ let _enginePhysics = (function () {
         }
     }
 
-    let  isInside = function(area, object) {
+    let isInside = function (area, object) {
         return object.massCenter.x > area.loc.x &&
             object.massCenter.x < area.loc.x + area.w &&
             object.massCenter.y > area.loc.y &&
             object.massCenter.y < area.loc.y + area.h;
     }
 
-    let applyDrag = function(area, object) {
+    let applyDrag = function (area, object) {
         let speed = object.velocity.mag();
         let dragMagnitude = area.c * speed * speed * object.area;
         let drag = new Vector();
@@ -221,7 +234,7 @@ let _enginePhysics = (function () {
         applyForce(object, drag);
     }
 
-    let applyForce = function(object, force) {
+    let applyForce = function (object, force) {
         let f = force;
         f = f.scale(object.massInverse);
         object.acceleration = object.acceleration.add(f);
