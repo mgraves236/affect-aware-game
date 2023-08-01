@@ -73,8 +73,8 @@ window.addEventListener('load', () => {
 
 export function drawScore() {
     screen.mContext.fillStyle="white"
-    screen.mContext.font="70px Arial";
-    screen.mContext.fillText(Engine.Score.computer + '\t\t\t\t\t\t' + Engine.Score.player, screen.mCanvas.width / 2 - 96, 90);
+    screen.mContext.font="70px Source Code Pro";
+    screen.mContext.fillText(Engine.Score.computer + '\t\t\t\t\t' + Engine.Score.player, screen.mCanvas.width / 2 - 146, 80);
 }
 
 
