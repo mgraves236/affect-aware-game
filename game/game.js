@@ -5,6 +5,7 @@ import {Circle} from './rigidBody/circle.js';
 import {Player} from "./player.js";
 import {Ball} from "./ball.js";
 import {Paddle} from "./paddle.js";
+import {Computer} from "./computer.js";
 
 // export const labels = ["Angry", "Fearful", "Happy", "Neutral", "Sad"]
 
@@ -57,10 +58,9 @@ window.addEventListener('load', () => {
         window.requestAnimationFrame(Engine.Core.initializeEngineCore);
         // let circle = new Circle(5, new Vector(0, 0),100, 0,0.1, 0.2);
         let mPlayer = new Player(new Vector(canvas_game.width - 20, canvas_game.height / 2 ));
-        mPlayer.additionalInfo = "player";
         Engine.Player = mPlayer;
-        let comPlayer = new Paddle(new Vector(20, canvas_game.height / 2 ))
-        let ball = new Ball(new Vector(500,450));
+        Engine.ComPlayer = new Computer(new Vector(20, canvas_game.height / 2 ));
+        Engine.Ball = new Ball(new Vector(500,450));
     }
     startGame();
 

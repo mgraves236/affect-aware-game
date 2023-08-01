@@ -6,6 +6,8 @@ import {Rectangle} from "./rigidBody/rectangle.js";
 export class Paddle extends Rectangle {
     constructor(position) {
         super(0, position, 20, 100, 0, 0, 1, false);
+        this.pos = position;
+        this.massCenter = this.pos;
     }
 
     display() {

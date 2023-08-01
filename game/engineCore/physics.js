@@ -30,18 +30,20 @@ let _enginePhysics = (function () {
                             if (Engine.Core.mAllObjects[i].boundTest(Engine.Core.mAllObjects[j])) {
                                 // collision detection with SAT
                                 if (Engine.Core.mAllObjects[i].collisionTest(Engine.Core.mAllObjects[j], collisionInfo)) {
+
                                     // the normal must always be from object i to object j
                                     let center = Engine.Core.mAllObjects[j].massCenter.subtract(Engine.Core.mAllObjects[i].massCenter);
                                     if (collisionInfo.normal.dot(center) < 0) {
                                         collisionInfo.changeDirection();
                                     }
                                     let ctx = screen.mContext;
-                                    ctx.save();
-                                    ctx.beginPath();
-                                    // display collision info vector
+                                    // ctx.save();
+                                    // ctx.beginPath();
+                                    // // display collision info vector
                                     // collisionInfo.display();
-                                    ctx.closePath();
-                                    ctx.restore();
+                                    // ctx.closePath();
+                                    // ctx.restore();
+
                                     // resolve collision
                                    resolveCollision(Engine.Core.mAllObjects[i],
                                        Engine.Core.mAllObjects[j], collisionInfo)
@@ -98,9 +100,9 @@ let _enginePhysics = (function () {
 
         // impulse response for each of the objects
         let restitution = Math.min(s1.restitution, s2.restitution);
-        restitution = restitution !== undefined ?  restitution : s1.restitution;
+        restitution = restitution !== undefined ? restitution : s1.restitution;
         let friction = Math.min(s1.friction, s2.friction);
-        friction = friction !== undefined ?  friction : s1.friction;
+        friction = friction !== undefined ? friction : s1.friction;
 
         // impulse in normal direction (from s1 to s2)
         // R cross N
@@ -109,8 +111,8 @@ let _enginePhysics = (function () {
         // impulse scalar
         let jN = -(1 + restitution) * relativeVelocityNormal;
         jN = jN / (s1.massInverse + s2.massInverse +
-                    R1xN * R1xN * s1.inertia +
-                    R2xN * R2xN * s2.inertia);
+            R1xN * R1xN * s1.inertia +
+            R2xN * R2xN * s2.inertia);
 
         let impulse = n.scale(jN);
         // impulse = F dt = m * delta(v)
@@ -132,10 +134,10 @@ let _enginePhysics = (function () {
         let R1xT = r1.cross(tangent);
         let R2xT = r2.cross(tangent);
         // impulse scalar
-        let jT = - (1 + restitution) * relativeVelocity.dot(tangent) * friction;
+        let jT = -(1 + restitution) * relativeVelocity.dot(tangent) * friction;
         jT = jT / (s1.massInverse + s2.massInverse +
-                        R1xT * R1xT * s1.inertia +
-                        R2xT * R2xT * s2.inertia);
+            R1xT * R1xT * s1.inertia +
+            R2xT * R2xT * s2.inertia);
 
         // jT with friction should be less that jN
         if (jT > jN) jT = jN;
@@ -147,6 +149,23 @@ let _enginePhysics = (function () {
         // update angular velocity based on normal
         s1.angularVelocity -= R1xT * jT * s1.inertia;
         s2.angularVelocity += R2xT * jT * s2.inertia;
+
+        if (s1.additionalInfo === "player" || s1.additionalInfo === "computer") {
+            if (r1.y > Engine.Player.height / 4) { // bottom of the paddle
+                if (s2.velocity.x > 0) { // bounce off left paddle
+                    s2.velocity = s2.velocity.rotate(Math.PI / 20, s2.massCenter);
+                } else if (s2.velocity.x < 0) { // bounce off right paddle
+                    s2.velocity = s2.velocity.rotate(-Math.PI / 20, s2.massCenter);
+                }
+            } else if (r1.y < -Engine.Player.height / 4) { // top of the paddle
+                if (s2.velocity.x > 0) { // bounce off left paddle
+                    s2.velocity = s2.velocity.rotate(-Math.PI / 20, s2.massCenter);
+                } else if (s2.velocity.x < 0) { // bounce off right paddle
+                    s2.velocity = s2.velocity.rotate(Math.PI / 20, s2.massCenter);
+                }
+            }
+            s2.velocity = s2.velocity.scale(s1.speed);
+        }
     }
 
     /**

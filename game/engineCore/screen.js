@@ -19,10 +19,10 @@ let screen = (function () {
     let x = mCanvas.width;
     let y = mCanvas.height;
     // infinite mass -- mass = 0
-    let top = new Rectangle(0, new Vector(x / 2, -5), x, 10, 0, 1, 0, false, "border");
-    let bottom = new Rectangle(0, new Vector(x / 2, y + 5), x, 10, 0, 1, 0, false, "border");
-    let left = new Rectangle(0, new Vector(-5, y / 2), 10, y, 0, 1, 0, false, "border");
-    let right = new Rectangle(0, new Vector(x + 5, y / 2), 10, y, 0, 1, 0, false, "border");
+    let top = new Rectangle(0, new Vector(x / 2, -5), x, 10, 0, 0, 1, false, "border");
+    let bottom = new Rectangle(0, new Vector(x / 2, y + 5), x, 10, 0, 0, 1, false, "border");
+    let left = new Rectangle(0, new Vector(-5, y / 2), 10, y, 0, 0, 1, false, "border");
+    let right = new Rectangle(0, new Vector(x + 5, y / 2), 10, y, 0, 0, 1, false, "border");
 
     return {
         mWidth: mCanvas.width,

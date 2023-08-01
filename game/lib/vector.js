@@ -119,7 +119,7 @@ export class Vector {
         r[0] += rotCenter.x;
         r[1] += rotCenter.y;
 
-       return new Vector(r[0], r[1])
+       return new Vector(r[0], r[1], this.x0, this.y0)
 
     }
 

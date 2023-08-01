@@ -1,5 +1,6 @@
 import {Engine} from "./core.js";
 import {screen} from "./screen.js";
+import {Vector} from "../lib/vector.js";
 
 
 
@@ -23,10 +24,8 @@ export function mainGame(currentTime) {
     screen.mContext.fillRect(0,0, screen.mWidth, screen.mHeight);
     // draw net
     screen.mContext.fillStyle = "rgba(255,255,255,0.65)";
-
     for(let i = 0; i < 12; i++)
     screen.mContext.fillRect(screen.mCanvas.height / 2 - 5, 87 * i, 10, 30);
-
 
     if (Engine.Core.mAllObjects !== null) {
         // update and display or delete object
@@ -36,6 +35,7 @@ export function mainGame(currentTime) {
         while (i < Engine.Core.mAllObjects.length) {
             Engine.Core.mAllObjects[i].update();
             Engine.Core.mAllObjects[i].display();
+
             i++;
         }
         let end = new Date().getTime();

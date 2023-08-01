@@ -1,5 +1,6 @@
 let video = document.getElementById("webcam");
 let modal = document.getElementById("webcam-alert");
+let modalComponent = document.getElementById("webcam-alert-component");
 let w, h;
 let checkbox = document.getElementById("show-video");
 let webcamComponent = document.getElementById("webcam-component");
@@ -31,10 +32,14 @@ function setupCamera() {
 }
 
 function openModal() {
+    modalComponent.style.display = "flex";
+
     modal.style.display = "block";
+
 }
 function closeModal() {
     modal.style.display = "none";
+    modalComponent.style.display = "none";
 
 }
 
