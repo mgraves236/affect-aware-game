@@ -3,11 +3,8 @@ import {Engine} from "./engineCore/core.js";
 import {screen} from "./engineCore/screen.js";
 import {Player} from "./player.js";
 
-screen.mCanvas.addEventListener('mousemove', handleMouseInput);
-// document.getElementById("game-canvas").addEventListener('click', event => console.log("hello"));
 
-
-function handleMouseInput(event) {
+export function handleMouseInput(event) {
     let mousePos = getMousePos(event);
     let yChange =  -Engine.Player.massCenter.y + mousePos.y
     if (!(Engine.Player.massCenter.y + yChange > screen.mCanvas.height - Engine.Player.height / 2)
@@ -16,7 +13,7 @@ function handleMouseInput(event) {
     }
 }
 
-function getMousePos(event) {
+export function getMousePos(event) {
     let rect = screen.mCanvas.getBoundingClientRect();
     let scaleX = screen.mCanvas.width / rect.width;
     let scaleY = screen.mCanvas.height / rect.height;

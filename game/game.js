@@ -1,26 +1,26 @@
 import {pred} from "../main.js";
 import {Engine} from './engineCore/core.js';
 import {Vector} from './lib/vector.js';
-import {Circle} from './rigidBody/circle.js';
 import {Player} from "./player.js";
 import {Ball} from "./ball.js";
-import {Paddle} from "./paddle.js";
 import {Computer} from "./computer.js";
-import {screen} from "./engineCore/screen.js";
+import {screen, setBoundaries} from "./engineCore/screen.js";
+import {drawPlayButton, clickBtn} from "./play-button.js";
+import {handleMouseInput} from "./user-control.js";
 
 // export const labels = ["Angry", "Fearful", "Happy", "Neutral", "Sad"]
 
 
 window.addEventListener('load', () => {
-    let canvas_game = document.getElementById("game-canvas");
-    let ctx_game = canvas_game.getContext("2d");
     let checkbox = document.getElementById("enable-emotion");
     let enableEmotion = true;
 
     document.getElementById("enable-emotion-component").addEventListener('click', () => {
         enableEmotion = checkbox.checked === true;
     });
-
+    screen.mContext.fillRect(0,0, screen.mWidth, screen.mHeight);
+    setUp();
+    drawWinner(100)
     // class Game {
     //     constructor(width, height) {
     //         this.width = width;
@@ -54,22 +54,27 @@ window.addEventListener('load', () => {
     //     requestAnimationFrame(animate);
     // }
     // animate();
-    function startGame() {
-        window.requestAnimationFrame(Engine.Core.initializeEngineCore);
-        // let circle = new Circle(5, new Vector(0, 0),100, 0,0.1, 0.2);
-        Engine.Score = {
-            player: 0,
-            computer: 0
-        }
-        let mPlayer = new Player(new Vector(canvas_game.width - 15, canvas_game.height / 2 ));
-        Engine.Player = mPlayer;
-        Engine.ComPlayer = new Computer(new Vector(15, canvas_game.height / 2 ));
-        Engine.Ball = new Ball(new Vector(canvas_game.width / 2,canvas_game.height / 2));
 
-    }
-    startGame();
 
 });
+
+export function startGame() {
+    screen.mCanvas.addEventListener('mousemove', handleMouseInput);
+    screen.mContext.clearRect(0, 0, screen.mWidth, screen.mHeight);
+    Engine.Core.mAllObjects = [];
+    setBoundaries();
+    Engine.Score = {
+        player: 0,
+        computer: 0
+    }
+    Engine.EndGame = false;
+    let mPlayer = new Player(new Vector(screen.mWidth - 15, screen.mHeight / 2 ));
+    Engine.Player = mPlayer;
+    Engine.ComPlayer = new Computer(new Vector(15, screen.mHeight / 2 ));
+    Engine.Ball = new Ball(new Vector(screen.mWidth / 2,screen.mHeight / 2));
+    window.requestAnimationFrame(Engine.Core.initializeEngineCore);
+
+}
 
 export function drawScore() {
     screen.mContext.fillStyle="white"
@@ -77,4 +82,13 @@ export function drawScore() {
     screen.mContext.fillText(Engine.Score.computer + '\t\t\t\t\t' + Engine.Score.player, screen.mCanvas.width / 2 - 146, 80);
 }
 
+export function drawWinner(x) {
+    screen.mContext.fillStyle="white"
+    screen.mContext.font="70px Source Code Pro";
+    screen.mContext.fillText("Winner", x, 400);
+}
 
+export function setUp() {
+    screen.mCanvas.addEventListener('click', clickBtn);
+    drawPlayButton();
+}

@@ -13,17 +13,6 @@ let screen = (function () {
     mCanvas.height = 450;
     mCanvas.width = 900;
 
-    /**
-     * Canvas boundaries
-     */
-    let x = mCanvas.width;
-    let y = mCanvas.height;
-    // infinite mass -- mass = 0
-    let top = new Rectangle(0, new Vector(x / 2, -5), x, 10, 0, 0, 1, false, "border");
-    let bottom = new Rectangle(0, new Vector(x / 2, y + 5), x, 10, 0, 0, 1, false, "border");
-    let left = new Rectangle(0, new Vector(-5, y / 2), 10, y, 0, 0, 1, false, "border-left");
-    let right = new Rectangle(0, new Vector(x + 5, y / 2), 10, y, 0, 0, 1, false, "border-right");
-
     return {
         mWidth: mCanvas.width,
         mHeight: mCanvas.height,
@@ -34,3 +23,12 @@ let screen = (function () {
 
 export {screen};
 
+export function setBoundaries() {
+    let x = screen.mCanvas.width;
+    let y = screen.mCanvas.height;
+    // infinite mass -- mass = 0
+    let top = new Rectangle(0, new Vector(x / 2, -5), x, 10, 0, 0, 1, false, "border");
+    let bottom = new Rectangle(0, new Vector(x / 2, y + 5), x, 10, 0, 0, 1, false, "border");
+    let left = new Rectangle(0, new Vector(-5, y / 2), 10, y, 0, 0, 1, false, "border-left");
+    let right = new Rectangle(0, new Vector(x + 5, y / 2), 10, y, 0, 0, 1, false, "border-right");
+}

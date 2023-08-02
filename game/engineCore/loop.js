@@ -1,8 +1,9 @@
 import {Engine} from "./core.js";
 import {screen} from "./screen.js";
 import {Vector} from "../lib/vector.js";
-import {drawScore} from "../game.js";
-
+import {drawScore, drawWinner} from "../game.js";
+import {handleMouseInput} from "../user-control.js";
+import {setUp} from "../game.js";
 
 let lastRenderTime = 0;
 let FPS = 60;
@@ -19,6 +20,8 @@ export function mainGame(currentTime) {
     const secondsSinceLastRender = (currentTime - lastRenderTime);
     if (secondsSinceLastRender < frameTime) return;
     lastRenderTime = currentTime;
+
+
     screen.mContext.clearRect(0, 0, screen.mWidth, screen.mHeight);
     screen.mContext.fillStyle = "rgba(0,0,0,1)";
     screen.mContext.fillRect(0,0, screen.mWidth, screen.mHeight);
@@ -27,8 +30,29 @@ export function mainGame(currentTime) {
     for(let i = 0; i < 12; i++)
     screen.mContext.fillRect(screen.mCanvas.width / 2 - 5, 50 * i, 10, 30);
 
+
     // update UI
     drawScore();
+    // check if game is finished
+    if (Engine.Score.computer === 2 || Engine.Score.player === 2 ) {
+        Engine.EndGame = true;
+        if (Engine.Core.mAllObjects !== null) {
+            let i = 0;
+            while (i < Engine.Core.mAllObjects.length) {
+                Engine.Core.mAllObjects[i].display();
+                i++;
+            }
+        }
+        if (Engine.Score.computer === 2) {
+            drawWinner(100);
+        } else {
+            drawWinner(100 + screen.mWidth / 2)
+        }
+        screen.mCanvas.removeEventListener('mousemove', handleMouseInput);
+        setUp();
+        return;
+    }
+
     if (Engine.Core.mAllObjects !== null) {
         // update and display or delete object
         let start = new Date().getTime();
@@ -48,6 +72,8 @@ export function mainGame(currentTime) {
             Engine.Core.mDragAreas[i].update();
         }
     }
+
+
     // run collision module
     Engine.Physics.collision();
     Engine.Physics.drag();
