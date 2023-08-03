@@ -34,7 +34,7 @@ export function mainGame(currentTime) {
     // update UI
     drawScore();
     // check if game is finished
-    if (Engine.Score.computer === 2 || Engine.Score.player === 2 ) {
+    if (Engine.Score.computer === Engine.MaxScore || Engine.Score.player ===  Engine.MaxScore ) {
         Engine.EndGame = true;
         if (Engine.Core.mAllObjects !== null) {
             let i = 0;
@@ -43,7 +43,7 @@ export function mainGame(currentTime) {
                 i++;
             }
         }
-        if (Engine.Score.computer === 2) {
+        if (Engine.Score.computer ===  Engine.MaxScore) {
             drawWinner(100);
         } else {
             drawWinner(100 + screen.mWidth / 2)

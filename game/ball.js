@@ -2,6 +2,8 @@ import {screen} from "./engineCore/screen.js";
 import {Vector} from "./lib/vector.js";
 import {Circle} from "./rigidBody/circle.js";
 import {Engine} from "./engineCore/core.js";
+import {enableEmotion} from "./game.js";
+import {pred} from "../main.js";
 
 export class Ball extends Circle {
     constructor(position) {
@@ -20,8 +22,28 @@ export class Ball extends Circle {
         ctx.moveTo(this.startpoint.x, this.startpoint.y);
         ctx.lineTo(this.massCenter.x, this.massCenter.y);
         ctx.closePath();
-        // TODO change fill style based on emotion
-        ctx.fillStyle = 'white';
+        if (enableEmotion) {
+            switch (pred.label[0]) {
+                case 0:
+                    ctx.fillStyle = 'red';
+                    break;
+                case 1:
+                    ctx.fillStyle = 'yellow';
+                    break;
+                case 2:
+                    ctx.fillStyle = 'rgb(255,2,197)';
+                    break;
+                case 3:
+                    ctx.fillStyle = 'white';
+                    break;
+                case 4:
+                    ctx.fillStyle = 'blue';
+                    break;
+            }
+
+        } else {
+            ctx.fillStyle = 'white';
+        }
         ctx.fill();
         ctx.restore();
     }
@@ -34,7 +56,7 @@ export class Ball extends Circle {
 
         }
         this.massCenter = new Vector(screen.mCanvas.width / 2,screen.mCanvas.height / 2);
-        setTimeout('', 3000);
+        setTimeout('', 5000);
     }
 
 }

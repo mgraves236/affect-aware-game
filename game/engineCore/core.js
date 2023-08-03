@@ -18,6 +18,7 @@ Engine.Core = undefined;
 Engine.Physics = undefined;
 
 Engine.Score = {player: 0, computer: 0};
+Engine.MaxScore = 11;
 Engine.EndGame = false;
 
 /**

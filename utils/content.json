@@ -5,7 +5,9 @@
     "agree": "OK",
     "reject": "Reject",
     "show-video": "Show video",
-    "enable-emotion": "Enable dynamic difficulty"
+    "enable-emotion": "Enable dynamic difficulty",
+    "play": "Play",
+    "winner": "Winner"
   },
   "polish": {
     "webcam-head": "Zezwolić na dostęp do kamery?",
@@ -13,6 +15,8 @@
     "agree": "Akceptuj",
     "reject": "Odrzuć",
     "show-video": "Pokaż podgląd",
-    "enable-emotion": "Włącz dynamiczny poziom trudności"
+    "enable-emotion": "Włącz dynamiczny poziom trudności",
+    "play": "Zagraj",
+    "winner": "Zwycięzca"
   }
 }

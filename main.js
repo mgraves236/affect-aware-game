@@ -26,7 +26,7 @@ export const pred = {
 pred.registerNewListener((val) => displayEmotion(pred.label));
 
 // window has been loaded with all dependencies
-// window.addEventListener("load", setupCamera);
+window.addEventListener("load", setupCamera);
 // // first frame has been loaded
-// video.addEventListener("loadeddata", setUp);
+video.addEventListener("loadeddata", setUp);
 

@@ -11,7 +11,7 @@ let textLabel = document.getElementById("predict")
 // variables to measure time between predictions
 let start = 0;
 let end = 0;
-let time_skip = 1 * 1000; // s
+let time_skip = 2 * 1000; // s
 let time = time_skip;
 
 tf.setBackend('webgl');

@@ -1,6 +1,7 @@
 import {screen} from "./engineCore/screen.js";
 import {getMousePos} from "./user-control.js";
 import {startGame} from "./game.js";
+import {attr} from "../utils/language.js";
 
 let playButton = {
     x: screen.mCanvas.width / 2 - 150,
@@ -18,7 +19,12 @@ export function drawPlayButton(text = "Play") {
     screen.mContext.fillRect(playButton.x, playButton.y, playButton.width, playButton.height);
     screen.mContext.fillStyle="white"
     screen.mContext.font="70px Source Code Pro";
-    screen.mContext.fillText(text, playButton.x + 40, playButton.y + 70);
+    if (attr === "english") {
+        screen.mContext.fillText(text, playButton.x + 40, playButton.y + 70);
+    } else {
+        screen.mContext.fillText(text, playButton.x + 5, playButton.y + 70);
+    }
+
 }
 
 export function clickBtn(e) {

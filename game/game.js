@@ -7,20 +7,22 @@ import {Computer} from "./computer.js";
 import {screen, setBoundaries} from "./engineCore/screen.js";
 import {drawPlayButton, clickBtn} from "./play-button.js";
 import {handleMouseInput} from "./user-control.js";
+import {attr} from "../utils/language.js";
+import data from '../utils/content.json' assert { type: 'json' };
+
 
 // export const labels = ["Angry", "Fearful", "Happy", "Neutral", "Sad"]
+export let enableEmotion = true;
 
 
 window.addEventListener('load', () => {
     let checkbox = document.getElementById("enable-emotion");
-    let enableEmotion = true;
 
     document.getElementById("enable-emotion-component").addEventListener('click', () => {
         enableEmotion = checkbox.checked === true;
     });
     screen.mContext.fillRect(0,0, screen.mWidth, screen.mHeight);
     setUp();
-    drawWinner(100)
     // class Game {
     //     constructor(width, height) {
     //         this.width = width;
@@ -46,15 +48,6 @@ window.addEventListener('load', () => {
     //         }
     //     }
     // }
-
-    // const game = new Game(canvas_game.width, canvas_game.height);
-
-    // function animate() {
-    //     game.draw(ctx_game);
-    //     requestAnimationFrame(animate);
-    // }
-    // animate();
-
 
 });
 
@@ -85,10 +78,18 @@ export function drawScore() {
 export function drawWinner(x) {
     screen.mContext.fillStyle="white"
     screen.mContext.font="70px Source Code Pro";
-    screen.mContext.fillText("Winner", x, 400);
+    if (attr === "english") {
+        screen.mContext.fillText(data.english["winner"], x, 400);
+    } else {
+        screen.mContext.fillText(data.polish["winner"], x - 70, 400);
+    }
 }
 
 export function setUp() {
     screen.mCanvas.addEventListener('click', clickBtn);
-    drawPlayButton();
+    if (attr === "english") {
+        drawPlayButton();
+    } else {
+        drawPlayButton(data.polish["play"]);
+    }
 }
