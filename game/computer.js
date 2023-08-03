@@ -8,7 +8,7 @@ export class Computer extends Paddle{
         super(position);
         this.additionalInfo = "computer";
         this.computerLevel = 0.1;
-        this.speed = 1.05;
+        this.speed = 1.1;
     }
 
     update() {
@@ -17,4 +17,9 @@ export class Computer extends Paddle{
             && !(this.massCenter.y + yChange < this.height / 2))
         this.move(new Vector(0, yChange));
     }
+
+    adjustDifficulty() {
+    // TODO change computer level and computer speed
+    }
+
 }

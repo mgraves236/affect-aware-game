@@ -1,4 +1,3 @@
-import {pred} from "../main.js";
 import {Engine} from './engineCore/core.js';
 import {Vector} from './lib/vector.js';
 import {Player} from "./player.js";
@@ -10,10 +9,7 @@ import {handleMouseInput} from "./user-control.js";
 import {attr} from "../utils/language.js";
 import data from '../utils/content.json' assert { type: 'json' };
 
-
-// export const labels = ["Angry", "Fearful", "Happy", "Neutral", "Sad"]
 export let enableEmotion = true;
-
 
 window.addEventListener('load', () => {
     let checkbox = document.getElementById("enable-emotion");
@@ -23,32 +19,6 @@ window.addEventListener('load', () => {
     });
     screen.mContext.fillRect(0,0, screen.mWidth, screen.mHeight);
     setUp();
-    // class Game {
-    //     constructor(width, height) {
-    //         this.width = width;
-    //         this.height = height;
-    //     }
-    //     update() {
-    //
-    //     }
-    //     draw(context) {
-    //         context.clearRect(0, 0, this.width, this.height);
-    //         console.log(enableEmotion)
-    //         if (enableEmotion) {
-    //
-    //             context.beginPath();
-    //             context.fillStyle = 'pink';
-    //             context.fillRect(0,0, 100, 100);
-    //             context.closePath();
-    //         } else {
-    //             context.beginPath();
-    //             context.fillStyle = 'black';
-    //             context.fillRect(0, 0, 100, 100);
-    //             context.closePath();
-    //         }
-    //     }
-    // }
-
 });
 
 export function startGame() {

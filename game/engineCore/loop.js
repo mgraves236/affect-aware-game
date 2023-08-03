@@ -1,6 +1,5 @@
 import {Engine} from "./core.js";
 import {screen} from "./screen.js";
-import {Vector} from "../lib/vector.js";
 import {drawScore, drawWinner} from "../game.js";
 import {handleMouseInput} from "../user-control.js";
 import {setUp} from "../game.js";

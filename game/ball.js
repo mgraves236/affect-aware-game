@@ -53,7 +53,6 @@ export class Ball extends Circle {
             this.velocity = new Vector(450*(Math.random()*0.5 + 0.5), 0);
         } else {
             this.velocity = new Vector(-450*(Math.random()*0.5 + 0.5), 0);
-
         }
         this.massCenter = new Vector(screen.mCanvas.width / 2,screen.mCanvas.height / 2);
         setTimeout('', 5000);

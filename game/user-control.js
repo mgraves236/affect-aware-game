@@ -1,8 +1,6 @@
 import {Vector} from "./lib/vector.js";
 import {Engine} from "./engineCore/core.js";
 import {screen} from "./engineCore/screen.js";
-import {Player} from "./player.js";
-
 
 export function handleMouseInput(event) {
     let mousePos = getMousePos(event);
