@@ -71,8 +71,8 @@ export function mainGame(currentTime) {
             Engine.Core.mDragAreas[i].update();
         }
     }
-
-
+    // dynamic difficulty
+    Engine.ComPlayer.adjustDifficulty();
     // run collision module
     Engine.Physics.collision();
     Engine.Physics.drag();
