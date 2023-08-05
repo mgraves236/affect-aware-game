@@ -106,7 +106,7 @@ export async function setUp() {
 }
 
 async function load() {
-    return await tf.loadLayersModel("../model/JSON/model.json");
+    return await tf.loadLayersModel("fer/model/JSON/model.json");
 }
 
 async function processImage(img) {
