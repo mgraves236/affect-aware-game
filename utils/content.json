@@ -7,7 +7,9 @@
     "show-video": "Show video",
     "enable-emotion": "Enable dynamic difficulty",
     "play": "Play",
-    "winner": "Winner"
+    "winner": "Winner",
+    "about": "About",
+    "about-text": "The app uses artificial intelligence to recognize \nplayer's emotions based on their facial expression. The image is obtained through a webcam. The video is not sent to a remote server, every computation is done within your web browser. "
   },
   "polish": {
     "webcam-head": "Zezwolić na dostęp do kamery?",
@@ -17,6 +19,7 @@
     "show-video": "Pokaż podgląd",
     "enable-emotion": "Włącz dynamiczny poziom trudności",
     "play": "Zagraj",
-    "winner": "Zwycięzca"
+    "winner": "Zwycięzca",
+    "about": "O aplikacji"
   }
 }

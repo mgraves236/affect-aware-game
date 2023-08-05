@@ -24,12 +24,6 @@ export function getMousePos(event) {
 
 export function handleTouchInput(event){
     event.preventDefault();
-    console.log('hello')
-    console.log(event)
-    // let touch = event.touches[0];
-    // // let x = touch.clientX;
-    // let y = touch.clientY;
-    // console.log(y)
     let touch = event.changedTouches[0];
     let y = touch.screenY;
     let yChange =  -Engine.Player.massCenter.y + y

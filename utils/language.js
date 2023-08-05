@@ -10,6 +10,8 @@ langBar.forEach(lang => {
 });
 
 function changeLang(language) {
+   document.getElementById("about").innerText = data[language]["about"];
+   document.getElementById("about").setAttribute("data-tooltip", data[language]["about-text"]);
    document.getElementById("show-video-label").innerText = data[language]["show-video"];
    document.getElementById("webcam-head").innerText = data[language]["webcam-head"];
    document.getElementById("webcam-desc").innerText = data[language]["webcam-desc"];

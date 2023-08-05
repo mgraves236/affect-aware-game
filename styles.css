@@ -51,6 +51,7 @@ main {
 .bar li {
     list-style-type: none;
     margin-left: 1rem;
+    cursor: pointer;
 }
 
 .dialog {
@@ -141,6 +142,87 @@ button:focus {
     margin: 0.5rem;
 }
 
+/*
+    Tooltip styles
+ */
+
+[data-tooltip] {
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+}
+
+[data-tooltip]:after,
+[data-tooltip]:before {
+    transition: all 0.5s ease-out;
+    opacity: 0;
+}
+
+[data-tooltip]:after {
+    color: white;
+    position: absolute;
+    top: 140%;
+    left: -80%;
+    visibility: hidden;
+    width: 40vw;
+    content: attr(data-tooltip);
+    background-color: #3a3a3a;
+    border-radius: 1rem;
+    padding: 1em 2em 2em 2em;
+}
+
+[data-tooltip]:before {
+    position: absolute;
+    top: 95%;
+    left: 0;
+    border-bottom: 0.85rem solid #3a3a3a;
+    border-right: 1rem solid transparent;
+    border-left: 1rem solid transparent;
+    content: " ";
+    font-size: 0;
+    line-height: 0;
+    visibility: hidden;
+}
+
+[data-tooltip]:hover:after,
+[data-tooltip]:hover:before {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Hide the tooltip content by default */
+/*[data-tooltip]:before,*/
+/*[data-tooltip]:after {*/
+/*    visibility: hidden;*/
+/*    opacity: 0;*/
+/*    pointer-events: none;*/
+/*}*/
+
+
+
+/*!* Triangle hack to make tooltip look like a speech bubble *!*/
+/*[data-tooltip]:after {*/
+/*    position: absolute;*/
+/*    bottom: 150%;*/
+/*    left: 50%;*/
+/*    margin-left: -5px;*/
+/*    width: 0;*/
+/*    border-top: 5px solid #000;*/
+/*    border-top: 5px solid hsla(0, 0%, 20%, 0.9);*/
+/*    border-right: 5px solid transparent;*/
+/*    border-left: 5px solid transparent;*/
+/*    content: " ";*/
+/*    font-size: 0;*/
+/*    line-height: 0;*/
+/*}*/
+
+/*!* Show tooltip content on hover *!*/
+/*[data-tooltip]:hover:before,*/
+/*[data-tooltip]:hover:after {*/
+/*    visibility: visible;*/
+/*    opacity: 1;*/
+/*}*/
+
 
 @media only screen and (max-width: 1000px) {
     .dialog {
@@ -156,4 +238,9 @@ button:focus {
         width: auto;
         height: 15vw;
     }
+
+    [data-tooltip]:after {
+        width: auto;
+    }
+
 }
