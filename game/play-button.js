@@ -18,7 +18,7 @@ export function drawPlayButton(text = "Play") {
     screen.mContext.fillStyle="black"
     screen.mContext.fillRect(playButton.x, playButton.y, playButton.width, playButton.height);
     screen.mContext.fillStyle="white"
-    screen.mContext.font="70px Source Code Pro";
+    screen.mContext.font="70px Lucida Console";
     if (attr === "english") {
         screen.mContext.fillText(text, playButton.x + 40, playButton.y + 70);
     } else {

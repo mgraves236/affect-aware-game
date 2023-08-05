@@ -5,7 +5,7 @@ import {Ball} from "./ball.js";
 import {Computer} from "./computer.js";
 import {screen, setBoundaries} from "./engineCore/screen.js";
 import {drawPlayButton, clickBtn} from "./play-button.js";
-import {handleMouseInput} from "./user-control.js";
+import {handleMouseInput, handleTouchInput} from "./user-control.js";
 import {attr} from "../utils/language.js";
 import data from '../utils/content.json' assert { type: 'json' };
 
@@ -23,6 +23,7 @@ window.addEventListener('load', () => {
 
 export function startGame() {
     screen.mCanvas.addEventListener('mousemove', handleMouseInput);
+    screen.mCanvas.addEventListener('touchmove', handleTouchInput);
     screen.mContext.clearRect(0, 0, screen.mWidth, screen.mHeight);
     Engine.Core.mAllObjects = [];
     setBoundaries();
@@ -41,13 +42,13 @@ export function startGame() {
 
 export function drawScore() {
     screen.mContext.fillStyle="white"
-    screen.mContext.font="70px Source Code Pro";
+    screen.mContext.font="70px Lucida Console";
     screen.mContext.fillText(Engine.Score.computer + '\t\t\t\t\t' + Engine.Score.player, screen.mCanvas.width / 2 - 146, 80);
 }
 
 export function drawWinner(x) {
     screen.mContext.fillStyle="white"
-    screen.mContext.font="70px Source Code Pro";
+    screen.mContext.font="70px Lucida Console";
     if (attr === "english") {
         screen.mContext.fillText(data.english["winner"], x, 400);
     } else {
