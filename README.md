@@ -15,3 +15,10 @@ The trained Xception network was converted into json file with [tfjs-converter](
 
 #### JavaScript implementation
 The first step is to access the user's webcam and detect their face. For this [Face-detction](https://github.com/tensorflow/tfjs-models/tree/master/face-detection) from TensorFlowJS models is used.
+
+The game to be integrated with the AI system is [Pong](https://en.wikipedia.org/wiki/Pong). It has been chosen as it is straightforward how to adjust game difficulty
+leaving much space to experiment with parameters that modify it. Player plays against a simple AI which moves a paddle according
+to the position of the ball. Difficulty level is mainly dependent on two parameters: paddle speed and 
+the ball's acceleration after colliding with the paddle. This two factors are 
+dynamically changed based on the player's mood.
+

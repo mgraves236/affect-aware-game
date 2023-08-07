@@ -43,6 +43,7 @@ main {
     flex-direction: row;
     align-items: center;
     color: #b0b0b0;
+    z-index: 54;
 }
 .bar li:hover {
     color: #ffffff;
@@ -148,23 +149,27 @@ button:focus {
 
 [data-tooltip] {
     position: relative;
-    z-index: 2;
     cursor: pointer;
+    white-space: pre-wrap;
+    z-index: 53;
 }
 
 [data-tooltip]:after,
 [data-tooltip]:before {
     transition: all 0.5s ease-out;
     opacity: 0;
+    white-space: pre-wrap;
+    z-index: 53;
 }
 
 [data-tooltip]:after {
     color: white;
     position: absolute;
     top: 140%;
-    left: -80%;
+    left: -200%;
     visibility: hidden;
     width: 40vw;
+    /*content: attr(data-tooltip);*/
     content: attr(data-tooltip);
     background-color: #3a3a3a;
     border-radius: 1rem;
@@ -190,40 +195,6 @@ button:focus {
     opacity: 1;
 }
 
-/* Hide the tooltip content by default */
-/*[data-tooltip]:before,*/
-/*[data-tooltip]:after {*/
-/*    visibility: hidden;*/
-/*    opacity: 0;*/
-/*    pointer-events: none;*/
-/*}*/
-
-
-
-/*!* Triangle hack to make tooltip look like a speech bubble *!*/
-/*[data-tooltip]:after {*/
-/*    position: absolute;*/
-/*    bottom: 150%;*/
-/*    left: 50%;*/
-/*    margin-left: -5px;*/
-/*    width: 0;*/
-/*    border-top: 5px solid #000;*/
-/*    border-top: 5px solid hsla(0, 0%, 20%, 0.9);*/
-/*    border-right: 5px solid transparent;*/
-/*    border-left: 5px solid transparent;*/
-/*    content: " ";*/
-/*    font-size: 0;*/
-/*    line-height: 0;*/
-/*}*/
-
-/*!* Show tooltip content on hover *!*/
-/*[data-tooltip]:hover:before,*/
-/*[data-tooltip]:hover:after {*/
-/*    visibility: visible;*/
-/*    opacity: 1;*/
-/*}*/
-
-
 @media only screen and (max-width: 1000px) {
     .dialog {
         width: 80%;
@@ -240,7 +211,8 @@ button:focus {
     }
 
     [data-tooltip]:after {
-        width: auto;
+        width: 70vw;
+        left: -540%;
     }
 
 }
