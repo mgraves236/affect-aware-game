@@ -25,11 +25,11 @@ export class Computer extends Paddle{
             switch (pred.label[0]) {
                 case 0: // angry
                     this.speed = 1.05;
-                    this.computerLevel = 0.07;
+                    this.computerLevel = 0.05;
                     break;
                 case 1: // fearful
                     this.speed = 1.05;
-                    this.computerLevel = 0.07;
+                    this.computerLevel = 0.05;
                     break;
                 case 2: // happy
                     this.speed = 1.11;
@@ -40,7 +40,7 @@ export class Computer extends Paddle{
                     break;
                 case 4: // sad
                     this.speed = 1.0;
-                    this.computerLevel = 0.05;
+                    this.computerLevel = 0.03;
                     break;
             }
         } else { // set default
