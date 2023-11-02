@@ -1,30 +1,29 @@
-import {screen} from "./engineCore/screen.js";
+import {canvas, ctx} from "./canvas.js";
 import {getMousePos} from "./user-control.js";
-import {startGame} from "./game.js";
+import {startGame} from "./game-main.js";
 import {attr} from "../utils/language.js";
 
 let playButton = {
-    x: screen.mCanvas.width / 2 - 150,
-    y: screen.mCanvas.height / 2 - 80,
+    x: canvas.width / 2 - 150,
+    y: canvas.height / 2 - 80,
     width: 250,
     height: 90
 }
 
 
 export function drawPlayButton(text = "Play") {
-    screen.mContext.strokeStyle = "rgba(255,255,255,0.80)";
-    screen.mContext.lineWidth = 8;
-    screen.mContext.strokeRect(playButton.x, playButton.y, playButton.width, playButton.height);
-    screen.mContext.fillStyle="black"
-    screen.mContext.fillRect(playButton.x, playButton.y, playButton.width, playButton.height);
-    screen.mContext.fillStyle="white"
-    screen.mContext.font="70px Lucida Console";
+    ctx.strokeStyle = "rgba(255,255,255,0.80)";
+    ctx.lineWidth = 8;
+    ctx.strokeRect(playButton.x, playButton.y, playButton.width, playButton.height);
+    ctx.fillStyle="black"
+    ctx.fillRect(playButton.x, playButton.y, playButton.width, playButton.height);
+    ctx.fillStyle="white"
+    ctx.font="70px Lucida Console";
     if (attr === "english") {
-        screen.mContext.fillText(text, playButton.x + 40, playButton.y + 70);
+        ctx.fillText(text, playButton.x + 40, playButton.y + 70);
     } else {
-        screen.mContext.fillText(text, playButton.x + 5, playButton.y + 70);
+        ctx.fillText(text, playButton.x + 5, playButton.y + 70);
     }
-
 }
 
 export function clickBtn(e) {
