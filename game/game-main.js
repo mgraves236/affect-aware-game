@@ -244,8 +244,8 @@ function adjustDifficulty() {
                 break;
         }
     } else { // set default
-        computerPaddle.speed = 1.05;
-        computerPaddle.level = 0.15;
+        computerPaddle.speed = 1.11;
+        computerPaddle.level = 0.1;
     }
 }
 

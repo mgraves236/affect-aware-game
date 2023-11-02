@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Emotion Detection</title>
+    <script src="https://kit.fontawesome.com/9d948e6a6d.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection@0.0.1/dist/face-landmarks-detection.js"></script>
+    <link rel="stylesheet" href="styles.css">
+<!--    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@700&display=swap" rel="preload" as="style">-->
+</head>
+<body>
+<menu class="bar">
+    <li class="lang" language="english">EN</li>
+    <li class="lang" language="polish">PL</li>
+    <li id="show-video-component">
+        <input type="checkbox" id="show-video" name="show-video" value="true" checked>
+        <label for="show-video" id="show-video-label">Show video</label>
+    </li>
+    <li id="enable-emotion-component">
+        <input type="checkbox" id="enable-emotion" name="enable-emotion" value="true" checked>
+        <label for="enable-emotion" id="enable-emotion-label">Enable dynamic difficulty</label>
+    </li>
+    <li id="about" data-tooltip=" ">About</li>
+    <li id="survey">Go to Survey</li>
+</menu>
+<main>
+    <div class="center" style="position: fixed; z-index: 51; display: none;" id="webcam-alert-component">
+        <div class="dialog" id="webcam-alert">
+            <h1 id="webcam-head"></h1>
+            <hr>
+            <p id="webcam-desc"></p>
+            <div class="right">
+                <button id="agree"></button>
+                <button id="reject" style="display: none"></button>
+            </div>
+        </div>
+    </div>
+    <div class="start">
+        <div id="webcam-component" class="column">
+            <canvas id="canvas"></canvas>
+            <video style="visibility: hidden" id="webcam" autoplay></video>
+            <span id="predict">Prediction: </span>
+        </div>
+        <canvas id="game-canvas"></canvas>
+    </div>
+</main>
+
+</body>
+<script type="module" src="utils/language.js"></script>
+<script src="fer/webcam.js"></script>
+<script type="module" src="main.js"></script>
+<script type="module" src="fer/face-detect.js"></script>
+<script type="module" src="game/game-main.js"></script>
+</html>

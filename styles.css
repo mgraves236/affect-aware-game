@@ -31,7 +31,13 @@ main {
     height: 100%;
     display: flex;
     justify-content: flex-start;
-
+}
+article {
+    justify-self: center;
+    align-self: center;
+    width: 60%;
+    text-align: justify;
+    padding-bottom: 5em;
 }
 
 .bar {

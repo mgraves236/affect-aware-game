@@ -17,6 +17,7 @@ function changeLang(language) {
    document.getElementById("webcam-desc").innerText = data[language]["webcam-desc"];
    document.getElementById("agree").innerText = data[language]["agree"];
    document.getElementById("enable-emotion-label").innerText = data[language]["enable-emotion"];
+   document.getElementById("survey").innerText = data[language]["survey"];
    // document.getElementById("reject").innerText = data[language]["reject"];
 }
 
