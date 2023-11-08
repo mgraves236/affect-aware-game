@@ -18,7 +18,7 @@
     "desc": "Participants are asked to play a game based on Pong (1972) with dynamic difficulty based on facial expression enabled and disabled. Management of the dynamic difficulty can be achieved through an option \"Enable dynamic difficulty\" available in the menu at the top of the page after accessing the application.",
     "desc-det": "After playing the game with dynamic difficulty enabled, please answer the questions from the first part of the survey which can be accessed in the menu at the top of the page after entering the application. It is advised to take at least a 2 minute break after answering the questions. Then, please play the game without dynamic difficulty and answer the remaining questions from the survey. The survey is fully anonymous and none of the obtained information is used to track down any of the participants. The video from the camera is not being stored. The survey might take up to ... minutes. \n\nTo participate in the study, confirm that you agree to take part in it by clicking on the button below.",
     "refresh": "If the video will not show after allowing access to the webcam, please refresh the website.",
-    "browsers": "Supported browsers: Google Chrome, Microsoft Edge",
+    "browsers": "Supported browsers: Google Chrome(v118.0.5993.120), Microsoft Edge (v118.0.2088.46)",
     "agree-suv": "Agree"
   },
   "polish": {
@@ -40,7 +40,7 @@
     "desc": "Badanie polega na zagraniu w grę Pong (1972) z włączoną dynamiczną trudnością ustalaną na podstawie emocji czytanych z mimki twarzy gracza oraz z wyłączoną opcją rozpoznawania emocji. Zarządzać dynamicznym poziomiem trudności można poprzez zaznaczenie opcji \"Włącz dynamiczny poziom trudności\" w menu na górze strony po przejściu do aplikacji.",
     "desc-det": "Po rozegraniu gry z włączoną dynamiczną trudnością należy odpowiedzieć na pytania zawarte w ankiecie dostępnej również w menu u góry strony po przejściu do aplikacji. Po odpowiedzi na pytania dotyczące tej części zaleca się podjęcie przynajmniej 2 minutowej przerwy. Następnie należy zagrać w wariant gry bez dynamicznej trudności i odpowiedzieć na pozostałe pytania z ankiety. Ankiety przeprowadzane są anonimowo. Żadna z pozyskanych informacji nie zostanie użyta do wyśledzenia uczestnika. Obraz z kamery nie jest w żaden sposób przechowywany. Badanie może potrwać do ... minut. \n\nAby wziąć udział w badaniu, należy wyrazić zgodę, klikając w poniższy przycisk.",
     "refresh": "Jeśli video nie wyświetli się po wyrażeniu zgody na dostęp do kamery, odśwież stronę.",
-    "browsers": "Wspierane przeglądarki: Google Chrome, Microsoft Edge",
+    "browsers": "Wspierane przeglądarki: Google Chrome(v118.0.5993.120), Microsoft Edge (v118.0.2088.46)",
     "agree-suv": "Zatwierdź"
   }
 }
