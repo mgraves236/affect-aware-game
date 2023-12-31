@@ -23,11 +23,11 @@ export function getMousePos(event) {
 
 export function handleTouchInput(event){
     event.preventDefault();
-    // let touch = event.changedTouches[0];
-    // let y = touch.screenY;
-    // let yChange =  -Engine.Player.massCenter.y + y
-    // if (!(Engine.Player.massCenter.y + yChange > screen.mCanvas.height - Engine.Player.height / 2)
-    //     && !(Engine.Player.massCenter.y + yChange < Engine.Player.height / 2)) {
-    //     Engine.Player.move(new Vector(0, yChange))
-    // }
+    let touch = event.changedTouches[0];
+    let y = touch.screenY;
+    let yChange =  - playerPaddle.y + mousePos.y
+    if (!(playerPaddle.y + yChange > canvas.height - playerPaddle.height / 2)
+        && !(playerPaddle.y + yChange < playerPaddle.height / 2)) {
+        playerPaddle.y = playerPaddle.y + yChange;
+    }
 }
