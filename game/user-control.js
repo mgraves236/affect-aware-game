@@ -25,10 +25,8 @@ export function handleTouchInput(event){
     event.preventDefault();
     let touch = event.changedTouches[0];
     let y = touch.screenY;
-    let yChange =  y;
-    playerPaddle.y = y;
-    if (!(playerPaddle.y + yChange > canvas.height - playerPaddle.height / 2)
-        && !(playerPaddle.y + yChange < playerPaddle.height / 2)) {
-        playerPaddle.y = playerPaddle.y + yChange;
+    if (!(y > canvas.height - playerPaddle.height / 2)
+        && !(y < playerPaddle.height / 2)) {
+        playerPaddle.y = y;
     }
 }
