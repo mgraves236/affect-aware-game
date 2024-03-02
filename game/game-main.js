@@ -107,7 +107,7 @@ function loop() {
     }
 
     if (collisionTest(ball, computerPaddle)) {
-        // change v_y if the ball hit the paddle at its ends
+        // change v_y if the ball hits the paddle at its ends
         if (ball.y > computerPaddle.y + computerPaddle.height / 4) { // bottom of the paddle
             ball.v_x = Math.sqrt(ball.v_y * ball.v_y + ball.v_x * ball.v_x) * computerPaddle.speed * Math.sin(Math.PI / 4);
             ball.v_y = Math.sqrt(ball.v_y * ball.v_y + ball.v_x * ball.v_x) * computerPaddle.speed * Math.cos(Math.PI / 4);
