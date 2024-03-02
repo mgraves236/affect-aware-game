@@ -235,8 +235,8 @@ function adjustDifficulty() {
                 computerPaddle.level = 0.1;
                 break;
             case 3: // neutral
-                computerPaddle.speed = 1.2;
-                computerPaddle.level = 0.2;
+                computerPaddle.speed = 1.11;
+                computerPaddle.level = 0.1;
                 break;
             case 4: // sad
                 computerPaddle.speed = 1.0;
