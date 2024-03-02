@@ -231,12 +231,12 @@ function adjustDifficulty() {
                 computerPaddle.level = 0.05;
                 break;
             case 2: // happy
-                computerPaddle.speed = 1.11;
-                computerPaddle.level = 0.1;
+                computerPaddle.speed = 1.2;
+                computerPaddle.level = 0.2;
                 break;
             case 3: // neutral
-                computerPaddle.speed = 1.11;
-                computerPaddle.level = 0.1;
+                computerPaddle.speed = 1.2;
+                computerPaddle.level = 0.2;
                 break;
             case 4: // sad
                 computerPaddle.speed = 1.0;
@@ -244,8 +244,8 @@ function adjustDifficulty() {
                 break;
         }
     } else { // set default
-        computerPaddle.speed = 1.11;
-        computerPaddle.level = 0.1;
+        computerPaddle.speed = 1.2;
+        computerPaddle.level = 0.2;
     }
 }
 
