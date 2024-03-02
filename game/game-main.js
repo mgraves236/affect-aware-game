@@ -144,7 +144,7 @@ function loop() {
 function drawScore() {
     ctx.fillStyle = "white"
     ctx.font = "70px Lucida Console";
-    ctx.fillText(score.computer + '\t\t\t\t\t' + score.player, canvas.width / 2 - 146, 80);
+    ctx.fillText(score.computer + '\t\t\t\t\t\t\t\t\t' + score.player, canvas.width / 2 - 146, 80);
 }
 
 function drawWinner(x) {
