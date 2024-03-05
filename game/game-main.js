@@ -21,7 +21,7 @@ window.addEventListener('load', () => {
 function setUp() {
     canvas.addEventListener('click', clickBtn);
     if (attr === "english") {
-        drawPlayButton();
+        drawPlayButton(data.english["play"]);
     } else {
         drawPlayButton(data.polish["play"]);
     }

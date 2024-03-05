@@ -84,13 +84,16 @@ async function detectFaces() {
 
 
 export async function setUp() {
+
+    if (attr === "english") {
+        textLabel.innerText = "Loading the model...";
+    } else if (attr === "polish") {
+        textLabel.innerText = "Wczytywanie modelu...";
+    }
     ctx.beginPath();
     ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
     ctx.rect(0, 0, canvas.width, canvas.height);
     ctx.fill();
-    ctx.font = "30px Arial";
-    ctx.fillStyle = "white";
-    ctx.fillText("Loading the model...", canvas.width / 2 - 150, canvas.height / 2 + 50);
 
     model = await faceLandmarksDetection.load(faceLandmarksDetection.SupportedPackages.mediapipeFacemesh);
     model_fer = await load();
@@ -98,9 +101,6 @@ export async function setUp() {
     ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
     ctx.rect(0, 0, canvas.width, canvas.height);
     ctx.fill();
-    ctx.font = "30px Arial";
-    ctx.fillStyle = "white";
-    ctx.fillText("Loading the model...", canvas.width / 2 - 150, canvas.height / 2 + 50);
 
     await detectFaces();
 }
