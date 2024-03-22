@@ -27,8 +27,11 @@ export function drawPlayButton(text = "Play") {
 }
 
 export function clickBtn(e) {
+    console.log('hello')
     let mousePos = getMousePos(e);
     if (isInside(mousePos, playButton)) {
+        console.log('hello2')
+
         startGame();
     }
 }
