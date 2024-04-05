@@ -19,6 +19,7 @@ function changeLangIntro(language) {
     document.getElementById("refresh").innerText = data[language]["refresh"];
     document.getElementById("browsers").innerText = data[language]["browsers"];
     document.getElementById("agree-suv").innerText = data[language]["agree-suv"];
+    document.getElementById("first-surv").innerText = data[language]["first-surv"];
 
 }
 

@@ -19,6 +19,8 @@ function changeLang(language) {
    // document.getElementById("enable-emotion-label").innerText = data[language]["enable-emotion"];
    document.getElementById("survey").innerText = data[language]["survey"];
    // document.getElementById("reject").innerText = data[language]["reject"];
+   document.getElementById("time-label").innerText = data[language]["time-label"];
+   document.getElementById("predict").innerText = data[language]["predict"];
 }
 
 function handleLang(event) {
