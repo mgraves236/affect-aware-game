@@ -1,6 +1,29 @@
 import {pred, labels, labelsPl} from "../main.js";
 import {attr} from "../utils/language.js";
 
+
+tf.setBackend('webgl');
+class Preprocess extends tf.layers.Layer {
+    constructor(config) {
+        super(config);
+    }
+    preprocess_input(inputs, kwargs) {
+        return inputs;
+    }
+
+    computeOutputShape(inputShape) {
+        return inputShape;
+    }
+
+    static get className() {
+        return 'Preprocess';
+    }
+}
+
+tf.serialization.registerClass(Preprocess);
+
+
+
 let model_fer;
 let model;
 let canvas = document.getElementById("canvas")
@@ -26,7 +49,6 @@ function changeTime(event) {
 let time_skip = 2 * 1000; // s
 let time = time_skip;
 
-tf.setBackend('webgl');
 
 // detect all faces in the frame and recognize emotions
 async function detectFaces() {
@@ -108,7 +130,9 @@ export async function setUp() {
     ctx.fill();
 
     model = await faceLandmarksDetection.load(faceLandmarksDetection.SupportedPackages.mediapipeFacemesh);
+    console.log('1', model)
     model_fer = await load();
+    console.log(model_fer)
     ctx.beginPath();
     ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
     ctx.rect(0, 0, canvas.width, canvas.height);
@@ -123,8 +147,11 @@ async function load() {
 
 async function processImage(img) {
     let tensor = await tf.browser.fromPixels(img)
-    tensor = tf.image.resizeBilinear(tensor, [229, 229]).mean(2).toFloat().div(tf.scalar(255));
-    return tensor.expandDims(0).expandDims(-1);
+    // tensor = tf.image.resizeBilinear(tensor, [224, 224]).mean(2).toFloat().div(tf.scalar(255))
+    // tensor.expandDims(0).expandDims(-1)
+    // tf.scalar(255) -- scale the input by 1./255
+    tensor = tf.image.resizeBilinear(tensor, [224, 224]).toFloat().div(tf.scalar(255));
+    return tensor.expandDims(0);
 }
 
 async function predictEmotion(img) {
@@ -132,12 +159,14 @@ async function predictEmotion(img) {
     let tensor = await processImage(img)
     const res = await model_fer.predict(tensor);
     let predictedValue = res.arraySync();
+    console.log(predictedValue)
     const max = Math.max(...predictedValue[0])
     // only get predictions that are almost certain
-    if (max >= 0.50) {
+    // if (max >= 0.50) {
         const index = predictedValue[0].indexOf(max)
         res_label = index;
-    }
+        console.log(res_label)
+    // }
     return res_label;
 }
 
