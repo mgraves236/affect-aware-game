@@ -269,8 +269,8 @@ function adjustDifficulty() {
                 break;
         }
     } else { // set default
-        computerPaddle.speed = 1.05;
-        computerPaddle.level = 0.15;
+        computerPaddle.speed = 1.00;
+        computerPaddle.level = 0.10;
     }
 }
 
@@ -308,8 +308,8 @@ function resetGame() {
         v_y: 0,
         height: paddle.height,
         width: paddle.width,
-        speed: 1.05,
-        level: 0.15
+        speed: 1.00,
+        level: 0.10
     }
 
     playerPaddle = {
@@ -318,7 +318,7 @@ function resetGame() {
         v_y: 0,
         height: paddle.height,
         width: paddle.width,
-        speed: 1.05
+        speed: 1.1
     }
 
      ball = {
