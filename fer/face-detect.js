@@ -148,7 +148,7 @@ async function load() {
 async function processImage(img) {
     let tensor = await tf.browser.fromPixels(img)
     // tensor = tf.image.resizeBilinear(tensor, [224, 224]).mean(2).toFloat().div(tf.scalar(255))
-    // tensor.expandDims(0).expandDims(-1)
+    // return tensor.expandDims(0).expandDims(-1)
     // tf.scalar(255) -- scale the input by 1./255
     tensor = tf.image.resizeBilinear(tensor, [224, 224]).toFloat().div(tf.scalar(255));
     return tensor.expandDims(0);
