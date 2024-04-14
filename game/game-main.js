@@ -102,11 +102,11 @@ function loop(currentTime) {
     // ball collides with a paddle
     if (collisionTest(ball, playerPaddle)) {
         // change v_y if the ball hit the paddle at its ends
-        if (ball.y > playerPaddle.y + playerPaddle.height / 4) { // bottom of the paddle
+        if (ball.y > playerPaddle.y + playerPaddle.height / 3) { // bottom of the paddle
             ball.v_x = -Math.sqrt(ball.v_y * ball.v_y + ball.v_x * ball.v_x) * playerPaddle.speed * Math.sin(Math.PI / 4);
             if (ball.v_x < -20) ball.v_x = -15;
             ball.v_y = Math.sqrt(ball.v_y * ball.v_y + ball.v_x * ball.v_x) * playerPaddle.speed * Math.cos(Math.PI / 4);
-        } else if (ball.y < playerPaddle.y - playerPaddle.height / 4) { // top of the paddle
+        } else if (ball.y < playerPaddle.y - playerPaddle.height / 3) { // top of the paddle
             ball.v_x = -Math.sqrt(ball.v_y * ball.v_y + ball.v_x * ball.v_x) * playerPaddle.speed * Math.sin(Math.PI / 4);
             if (ball.v_x < -20) ball.v_x = -15;
             ball.v_y = -Math.sqrt(ball.v_y * ball.v_y + ball.v_x * ball.v_x) * playerPaddle.speed * Math.cos(Math.PI / 4);
@@ -121,11 +121,11 @@ function loop(currentTime) {
 
     if (collisionTest(ball, computerPaddle)) {
         // change v_y if the ball hits the paddle at its ends
-        if (ball.y > computerPaddle.y + computerPaddle.height / 4) { // bottom of the paddle
+        if (ball.y > computerPaddle.y + computerPaddle.height / 3) { // bottom of the paddle
             ball.v_x = Math.sqrt(ball.v_y * ball.v_y + ball.v_x * ball.v_x) * computerPaddle.speed * Math.sin(Math.PI / 4);
             if (ball.v_x < -20) ball.v_x = -15;
             ball.v_y = Math.sqrt(ball.v_y * ball.v_y + ball.v_x * ball.v_x) * computerPaddle.speed * Math.cos(Math.PI / 4);
-        } else if (ball.y < computerPaddle.y - computerPaddle.height / 4) { // top of the paddle
+        } else if (ball.y < computerPaddle.y - computerPaddle.height / 3) { // top of the paddle
             ball.v_x = Math.sqrt(ball.v_y * ball.v_y + ball.v_x * ball.v_x) * computerPaddle.speed * Math.sin(Math.PI / 4);
             if (ball.v_x < -20) ball.v_x = -15;
             ball.v_y = -Math.sqrt(ball.v_y * ball.v_y + ball.v_x * ball.v_x) * computerPaddle.speed * Math.cos(Math.PI / 4);
@@ -238,7 +238,6 @@ function reset() {
 
 function adjustDifficulty() {
     if (enableEmotion) {
-        console.log('hej')
         switch (pred.label[0]) {
             case 0: // angry
                 // computerPaddle.speed = 1.05;
