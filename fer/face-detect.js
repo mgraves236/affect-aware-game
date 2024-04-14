@@ -130,9 +130,7 @@ export async function setUp() {
     ctx.fill();
 
     model = await faceLandmarksDetection.load(faceLandmarksDetection.SupportedPackages.mediapipeFacemesh);
-    console.log('1', model)
     model_fer = await load();
-    console.log(model_fer)
     ctx.beginPath();
     ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
     ctx.rect(0, 0, canvas.width, canvas.height);
@@ -159,13 +157,11 @@ async function predictEmotion(img) {
     let tensor = await processImage(img)
     const res = await model_fer.predict(tensor);
     let predictedValue = res.arraySync();
-    console.log(predictedValue)
     const max = Math.max(...predictedValue[0])
     // only get predictions that are almost certain
     // if (max >= 0.50) {
         const index = predictedValue[0].indexOf(max)
         res_label = index;
-        console.log(res_label)
     // }
     return res_label;
 }
