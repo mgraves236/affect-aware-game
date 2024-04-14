@@ -5,7 +5,7 @@ import data from "../utils/content.json" assert {type: 'json'};
 import {canvas, ctx} from "./canvas.js";
 import {pred} from "../main.js";
 
-let enableEmotion = false;
+let enableEmotion = true;
 let endGame = false;
 
 window.addEventListener('load', () => {
