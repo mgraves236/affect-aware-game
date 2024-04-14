@@ -17,7 +17,8 @@ function changeLang(language) {
    document.getElementById("webcam-desc").innerText = data[language]["webcam-desc"];
    document.getElementById("agree").innerText = data[language]["agree"];
    // document.getElementById("enable-emotion-label").innerText = data[language]["enable-emotion"];
-   document.getElementById("survey").innerText = data[language]["survey"];
+   document.getElementById("survey-pl").innerText = data[language]["survey-pl"];
+   document.getElementById("survey-en").innerText = data[language]["survey-en"];
    // document.getElementById("reject").innerText = data[language]["reject"];
    // document.getElementById("time-label").innerText = data[language]["time-label"];
    document.getElementById("predict").innerText = data[language]["predict"];
