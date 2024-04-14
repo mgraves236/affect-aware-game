@@ -238,6 +238,7 @@ function reset() {
 
 function adjustDifficulty() {
     if (enableEmotion) {
+        console.log('hej')
         switch (pred.label[0]) {
             case 0: // angry
                 // computerPaddle.speed = 1.05;
