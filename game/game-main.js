@@ -194,28 +194,28 @@ function drawBall() {
         ball.r, 0, Math.PI * 2, true);
     ctx.closePath();
     // console.log(enableEmotion,pred.label[0])
-    // if (enableEmotion) {
-    //     switch (pred.label[0]) {
-    //         case 0:
-    //             ctx.fillStyle = 'red';
-    //             break;
-    //         case 1:
-    //             ctx.fillStyle = 'yellow';
-    //             break;
-    //         case 2:
-    //             ctx.fillStyle = 'rgb(255,2,197)';
-    //             break;
-    //         case 3:
-    //             ctx.fillStyle = 'white';
-    //             break;
-    //         case 4:
-    //             ctx.fillStyle = 'blue';
-    //             break;
-    //     }
-    //
-    // } else {
-    //     ctx.fillStyle = 'white';
-    // }
+    if (enableEmotion) {
+        switch (pred.label[0]) {
+            case 0:
+                ctx.fillStyle = 'red';
+                break;
+            case 1:
+                ctx.fillStyle = 'yellow';
+                break;
+            case 2:
+                ctx.fillStyle = 'rgb(255,2,197)';
+                break;
+            case 3:
+                ctx.fillStyle = 'white';
+                break;
+            case 4:
+                ctx.fillStyle = 'blue';
+                break;
+        }
+
+    } else {
+        ctx.fillStyle = 'white';
+    }
     ctx.fillStyle = 'white';
     ctx.fill();
     ctx.restore();
