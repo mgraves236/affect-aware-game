@@ -5,7 +5,7 @@ import data from "../utils/content.json" assert {type: 'json'};
 import {canvas, ctx} from "./canvas.js";
 import {pred} from "../main.js";
 
-let enableEmotion = true;
+let enableEmotion = false;
 let endGame = false;
 
 window.addEventListener('load', () => {
@@ -65,7 +65,7 @@ function loop(currentTime) {
         canvas.removeEventListener('mousemove', handleMouseInput);
         canvas.removeEventListener('touchmove', handleTouchInput);
         setUp();
-        // enableEmotion = true;
+        enableEmotion = true;
         return;
     }
 
@@ -194,29 +194,29 @@ function drawBall() {
         ball.r, 0, Math.PI * 2, true);
     ctx.closePath();
     // console.log(enableEmotion,pred.label[0])
-    if (enableEmotion) {
-        switch (pred.label[0]) {
-            case 0:
-                ctx.fillStyle = 'red';
-                break;
-            case 1:
-                ctx.fillStyle = 'yellow';
-                break;
-            case 2:
-                ctx.fillStyle = 'rgb(255,2,197)';
-                break;
-            case 3:
-                ctx.fillStyle = 'white';
-                break;
-            case 4:
-                ctx.fillStyle = 'blue';
-                break;
-        }
-
-    } else {
-        ctx.fillStyle = 'white';
-    }
-    // ctx.fillStyle = 'white';
+    // if (enableEmotion) {
+    //     switch (pred.label[0]) {
+    //         case 0:
+    //             ctx.fillStyle = 'red';
+    //             break;
+    //         case 1:
+    //             ctx.fillStyle = 'yellow';
+    //             break;
+    //         case 2:
+    //             ctx.fillStyle = 'rgb(255,2,197)';
+    //             break;
+    //         case 3:
+    //             ctx.fillStyle = 'white';
+    //             break;
+    //         case 4:
+    //             ctx.fillStyle = 'blue';
+    //             break;
+    //     }
+    //
+    // } else {
+    //     ctx.fillStyle = 'white';
+    // }
+    ctx.fillStyle = 'white';
     ctx.fill();
     ctx.restore();
 }
@@ -270,7 +270,7 @@ function adjustDifficulty() {
         }
     } else { // set default
         computerPaddle.speed = 1.00;
-        computerPaddle.level = 0.10;
+        computerPaddle.level = 0.15;
     }
 }
 
@@ -309,7 +309,7 @@ function resetGame() {
         height: paddle.height,
         width: paddle.width,
         speed: 1.00,
-        level: 0.10
+        level: 0.15
     }
 
     playerPaddle = {

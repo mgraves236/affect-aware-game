@@ -35,18 +35,18 @@ let textLabel = document.getElementById("predict")
 let start = 0;
 let end = 0;
 
-let timeSelect = document.getElementById("time")
+// let timeSelect = document.getElementById("time")
 
-window.addEventListener('load', () => {
-    timeSelect.addEventListener('click', changeTime);
-});
-function changeTime(event) {
-    let e = document.getElementById("time");
-    let value = e.value;
-     time_skip = parseInt(e.value) * 1000;
-}
+// window.addEventListener('load', () => {
+//     timeSelect.addEventListener('click', changeTime);
+// });
+// function changeTime(event) {
+//     let e = document.getElementById("time");
+//     let value = e.value;
+//      time_skip = parseInt(e.value) * 1000;
+// }
 
-let time_skip = 2 * 1000; // s
+let time_skip = 5 * 1000; // s
 let time = time_skip;
 
 
