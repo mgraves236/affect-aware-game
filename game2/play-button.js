@@ -1,8 +1,9 @@
 import {canvas, ctx} from "./canvas.js";
 import {getMousePos} from "./user-control.js";
 import {startGame} from "./game-main.js";
-import {attr} from "../utils/language.js";
+// import {attr} from "../utils/language.js";
 
+let attr = "polish"
 let playButton = {
     x: canvas.width / 2 - 150,
     y: canvas.height / 2 - 80,
@@ -27,11 +28,8 @@ export function drawPlayButton(text = "Play") {
 }
 
 export function clickBtn(e) {
-    console.log('hello')
     let mousePos = getMousePos(e);
     if (isInside(mousePos, playButton)) {
-        console.log('hello2')
-
         startGame();
     }
 }

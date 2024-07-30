@@ -1,7 +1,8 @@
 import {handleMouseInput, handleTouchInput} from "./user-control.js";
 import {clickBtn, drawPlayButton} from "./play-button.js";
-import {attr} from "../utils/language.js";
-import data from "../utils/content.json" assert {type: 'json'};
+// import {attr} from "../utils/language.js";
+// import data from "../utils/content.json" assert {type: 'json'};
+// const { default: data } = await import("../utils/content.json", { assert: { type: "json" } })
 import {canvas, ctx} from "./canvas.js";
 import {pred} from "../main.js";
 
@@ -20,11 +21,12 @@ window.addEventListener('load', () => {
 
 function setUp() {
     canvas.addEventListener('click', clickBtn);
-    if (attr === "english") {
-        drawPlayButton(data.english["play"]);
-    } else {
-        drawPlayButton(data.polish["play"]);
-    }
+    drawPlayButton("Zagraj");
+    // if (attr === "english") {
+    //     drawPlayButton(data.english["play"]);
+    // } else {
+    //     drawPlayButton(data.polish["play"]);
+    // }
 }
 
 export function startGame() {
@@ -165,11 +167,12 @@ function drawScore() {
 function drawWinner(x) {
     ctx.fillStyle = "white"
     ctx.font = "70px Lucida Console";
-    if (attr === "english") {
-        ctx.fillText(data.english["winner"], x, 400);
-    } else {
-        ctx.fillText(data.polish["winner"], x - 70, 400);
-    }
+    ctx.fillText("Zwycięzca", x -70, 400);
+    // if (attr === "english") {
+    //     ctx.fillText(data.english["winner"], x, 400);
+    // } else {
+    //     ctx.fillText(data.polish["winner"], x - 70, 400);
+    // }
 }
 
 function drawPaddles() {

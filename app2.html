@@ -7,33 +7,33 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection@0.0.1/dist/face-landmarks-detection.js"></script>
     <link rel="stylesheet" href="styles.css">
-<!--    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@700&display=swap" rel="preload" as="style">-->
+    <!--    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@700&display=swap" rel="preload" as="style">-->
 </head>
 <body>
 <menu class="bar">
-    <li class="lang" language="english">EN</li>
-    <li class="lang" language="polish">PL</li>
+    <!--    <li class="lang" language="english">EN</li>-->
+    <!--    <li class="lang" language="polish">PL</li>-->
     <li id="show-video-component">
         <input type="checkbox" id="show-video" name="show-video" value="true" checked>
-        <label for="show-video" id="show-video-label"></label>
+        <label for="show-video" id="show-video-label">Pokaż podgląd</label>
     </li>
-<!--    <li id="enable-emotion-component">-->
-<!--        <input type="checkbox" id="enable-emotion" name="enable-emotion" value="true" checked>-->
-<!--        <label for="enable-emotion" id="enable-emotion-label"></label>-->
-<!--    </li>-->
+    <!--    <li id="enable-emotion-component">-->
+    <!--        <input type="checkbox" id="enable-emotion" name="enable-emotion" value="true" checked>-->
+    <!--        <label for="enable-emotion" id="enable-emotion-label">Włącz dynamiczny poziom trudności</label>-->
+    <!--    </li>-->
     <li id="about" data-tooltip=" "></li>
-    <a href="https://forms.gle/Rt3GnBmrzLHtaUwE7" target="_blank"><li id="survey-pl"></li></a>
-    <a href="https://forms.gle/BwWAHqyjovuqUkGF8" target="_blank"><li id="survey-en"></li></a>
+    <a href="https://forms.gle/Rt3GnBmrzLHtaUwE7" target="_blank"><li id="survey-pl">Przejdź do ankiety (PL)</li></a>
+    <a href="https://forms.gle/BwWAHqyjovuqUkGF8" target="_blank"><li id="survey-en">Przejdź do ankiety (EN)</li></a>
 </menu>
 <main>
     <div class="center" style="position: fixed; z-index: 51; display: none;" id="webcam-alert-component">
         <div class="dialog" id="webcam-alert">
-            <h1 id="webcam-head"></h1>
+            <h1 id="webcam-head">Zezwolić na dostęp do kamery?</h1>
             <hr>
-            <p id="webcam-desc"></p>
+            <p id="webcam-desc">Aplikacja wymaga użycia kamery do poprawnego działania. Obraz nie jest wysyłany na serwer zewnętrzny, wszystkie wymagane działania realizowane są w przeglądarce internetowej. Zewzól na dostęp do kamery i graj z zachowaniem całkowitej prywatności! Zmień dostęp w ustawieniach przeglądarki.</p>
             <div class="right">
-                <button id="agree"></button>
-                <button id="reject" style="display: none"></button>
+                <button id="agree">Akceptuj</button>
+                <button id="reject" style="display: none">Odrzuć</button>
             </div>
         </div>
     </div>
@@ -41,23 +41,23 @@
         <div id="webcam-component" class="column" >
             <canvas id="canvas"></canvas>
             <video style="visibility: hidden" id="webcam" autoplay></video>
-            <span id="predict"></span>
+            <span id="predict">Wczytywanie modelu...</span>
         </div>
         <canvas id="game-canvas"></canvas>
-<!--        <div style="margin-left:1em;">-->
-<!--        <label id="time-label" for="time">Czas między predykcjami:</label><br><select name="time" id="time">-->
-<!--            <option value="2">2 s</option>-->
-<!--            <option value="5">5 s</option>-->
-<!--            <option value="10">10 s</option>-->
-<!--        </select>-->
-<!--        </div>-->
+        <!--        <div style="margin-left:1em;">-->
+        <!--        <label id="time-label" for="time">Czas między predykcjami:</label><br><select name="time" id="time">-->
+        <!--            <option value="2">2 s</option>-->
+        <!--            <option value="5">5 s</option>-->
+        <!--            <option value="10">10 s</option>-->
+        <!--        </select>-->
+        <!--        </div>-->
     </div>
 </main>
 
 </body>
-<script type="module" src="utils/language.js"></script>
+<!--<script type="module" src="utils/language.js"></script>-->
 <script src="fer/webcam.js"></script>
 <script type="module" src="main.js"></script>
 <script type="module" src="fer/face-detect.js"></script>
-<script type="module" src="game2/game-main.js"></script>
+<script type="module" src="game/game-main.js"></script>
 </html>

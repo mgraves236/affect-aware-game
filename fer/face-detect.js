@@ -1,7 +1,7 @@
 import {pred, labels, labelsPl} from "../main.js";
-import {attr} from "../utils/language.js";
+// import {attr} from "../utils/language.js";
 
-
+let attr = "polish"
 tf.setBackend('webgl');
 class Preprocess extends tf.layers.Layer {
     constructor(config) {

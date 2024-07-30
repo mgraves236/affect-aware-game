@@ -1,4 +1,6 @@
-import data from './content.json' assert { type: 'json' };
+// import data from './content.json' assert { type: 'json' };
+
+
 
 let defaultLanguage = "polish";
 let langBar = document.querySelectorAll(".lang");
