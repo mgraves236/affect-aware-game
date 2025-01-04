@@ -2,32 +2,30 @@ import {handleMouseInput, handleTouchInput} from "./user-control.js";
 import {clickBtn, drawPlayButton} from "./play-button.js";
 // import {attr} from "../utils/language.js";
 // import data from "../utils/content.json" assert {type: 'json'};
-// const { default: data } = await import("../utils/content.json", { assert: { type: "json" } })
 import {canvas, ctx} from "./canvas.js";
 import {pred} from "../main.js";
 
-let enableEmotion = false;
+const attr = "english"
+let enableEmotion = true;
 let endGame = false;
 
 window.addEventListener('load', () => {
-    // let checkbox = document.getElementById("enable-emotion");
-    //
-    // document.getElementById("enable-emotion-component").addEventListener('click', () => {
-    //     enableEmotion = checkbox.checked === true;
-    // });
+    let checkbox = document.getElementById("enable-emotion");
+
+    document.getElementById("enable-emotion-component").addEventListener('click', () => {
+        enableEmotion = checkbox.checked === true;
+    });
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     setUp();
 });
 
 function setUp() {
     canvas.addEventListener('click', clickBtn);
-    drawPlayButton("Zagraj");
-
-    // if (attr === "english") {
-    //     drawPlayButton(data.english["play"]);
-    // } else {
-    //     drawPlayButton(data.polish["play"]);
-    // }
+    if (attr === "english") {
+        drawPlayButton("Play");
+    } else {
+        drawPlayButton("Zagraj");
+    }
 }
 
 export function startGame() {
@@ -68,7 +66,7 @@ function loop(currentTime) {
         canvas.removeEventListener('mousemove', handleMouseInput);
         canvas.removeEventListener('touchmove', handleTouchInput);
         setUp();
-        // enableEmotion = true;
+        enableEmotion = true;
         return;
     }
 
@@ -105,11 +103,11 @@ function loop(currentTime) {
     // ball collides with a paddle
     if (collisionTest(ball, playerPaddle)) {
         // change v_y if the ball hit the paddle at its ends
-        if (ball.y > playerPaddle.y + playerPaddle.height / 7) { // bottom of the paddle
+        if (ball.y > playerPaddle.y + playerPaddle.height / 4) { // bottom of the paddle
             ball.v_x = -Math.sqrt(ball.v_y * ball.v_y + ball.v_x * ball.v_x) * playerPaddle.speed * Math.sin(Math.PI / 4);
             if (ball.v_x < -20) ball.v_x = -15;
             ball.v_y = Math.sqrt(ball.v_y * ball.v_y + ball.v_x * ball.v_x) * playerPaddle.speed * Math.cos(Math.PI / 4);
-        } else if (ball.y < playerPaddle.y - playerPaddle.height / 7) { // top of the paddle
+        } else if (ball.y < playerPaddle.y - playerPaddle.height / 4) { // top of the paddle
             ball.v_x = -Math.sqrt(ball.v_y * ball.v_y + ball.v_x * ball.v_x) * playerPaddle.speed * Math.sin(Math.PI / 4);
             if (ball.v_x < -20) ball.v_x = -15;
             ball.v_y = -Math.sqrt(ball.v_y * ball.v_y + ball.v_x * ball.v_x) * playerPaddle.speed * Math.cos(Math.PI / 4);
@@ -124,11 +122,11 @@ function loop(currentTime) {
 
     if (collisionTest(ball, computerPaddle)) {
         // change v_y if the ball hits the paddle at its ends
-        if (ball.y > computerPaddle.y + computerPaddle.height / 7) { // bottom of the paddle
+        if (ball.y > computerPaddle.y + computerPaddle.height / 4) { // bottom of the paddle
             ball.v_x = Math.sqrt(ball.v_y * ball.v_y + ball.v_x * ball.v_x) * computerPaddle.speed * Math.sin(Math.PI / 4);
             if (ball.v_x < -20) ball.v_x = -15;
             ball.v_y = Math.sqrt(ball.v_y * ball.v_y + ball.v_x * ball.v_x) * computerPaddle.speed * Math.cos(Math.PI / 4);
-        } else if (ball.y < computerPaddle.y - computerPaddle.height / 7) { // top of the paddle
+        } else if (ball.y < computerPaddle.y - computerPaddle.height / 4) { // top of the paddle
             ball.v_x = Math.sqrt(ball.v_y * ball.v_y + ball.v_x * ball.v_x) * computerPaddle.speed * Math.sin(Math.PI / 4);
             if (ball.v_x < -20) ball.v_x = -15;
             ball.v_y = -Math.sqrt(ball.v_y * ball.v_y + ball.v_x * ball.v_x) * computerPaddle.speed * Math.cos(Math.PI / 4);
@@ -168,12 +166,11 @@ function drawScore() {
 function drawWinner(x) {
     ctx.fillStyle = "white"
     ctx.font = "70px Lucida Console";
-    ctx.fillText("Zwycięzca", x - 70, 400);
-    // if (attr === "english") {
-    //     ctx.fillText(data.english["winner"], x, 400);
-    // } else {
-    //     ctx.fillText(data.polish["winner"], x - 70, 400);
-    // }
+    if (attr === "english") {
+        ctx.fillText(data.english["winner"], x, 400);
+    } else {
+        ctx.fillText(data.polish["winner"], x - 70, 400);
+    }
 }
 
 function drawPaddles() {
@@ -182,17 +179,11 @@ function drawPaddles() {
     ctx.fillStyle = 'white';
     ctx.fillRect(computerPaddle.x - computerPaddle.width / 2, computerPaddle.y - computerPaddle.height / 2, computerPaddle.width,
         computerPaddle.height);
-    // ctx.fillStyle = 'red';
-    // ctx.fillRect(computerPaddle.x - computerPaddle.width / 2, computerPaddle.y - computerPaddle.height / 2, computerPaddle.width,
-    //     computerPaddle.height/6);
-
     ctx.closePath();
     ctx.beginPath();
     ctx.fillStyle = 'white';
     ctx.fillRect(playerPaddle.x - playerPaddle.width / 2, playerPaddle.y - playerPaddle.height / 2, playerPaddle.width,
         playerPaddle.height);
-    // ctx.fillStyle = 'red';
-    // ctx.fillRect(playerPaddle.x - playerPaddle.width / 2, playerPaddle.y, playerPaddle.width, playerPaddle.height/7);
     ctx.closePath();
     ctx.restore();
 }
@@ -203,7 +194,6 @@ function drawBall() {
     ctx.arc(ball.x, ball.y,
         ball.r, 0, Math.PI * 2, true);
     ctx.closePath();
-    // console.log(enableEmotion,pred.label[0])
     if (enableEmotion) {
         switch (pred.label[0]) {
             case 0:
@@ -226,7 +216,7 @@ function drawBall() {
     } else {
         ctx.fillStyle = 'white';
     }
-    ctx.fillStyle = 'white';
+    // ctx.fillStyle = 'white';
     ctx.fill();
     ctx.restore();
 }
@@ -279,7 +269,7 @@ function adjustDifficulty() {
                 break;
         }
     } else { // set default
-        computerPaddle.speed = 1.00;
+        computerPaddle.speed = 1.05;
         computerPaddle.level = 0.15;
     }
 }
@@ -318,7 +308,7 @@ function resetGame() {
         v_y: 0,
         height: paddle.height,
         width: paddle.width,
-        speed: 1.00,
+        speed: 1.05,
         level: 0.15
     }
 
@@ -328,7 +318,7 @@ function resetGame() {
         v_y: 0,
         height: paddle.height,
         width: paddle.width,
-        speed: 1.1
+        speed: 1.05
     }
 
      ball = {

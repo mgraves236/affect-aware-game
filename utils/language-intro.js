@@ -1,6 +1,4 @@
-// import data from './content.json' assert { type: 'json' };
-
-
+import data from './content.json' assert { type: 'json' };
 
 let defaultLanguage = "polish";
 let langBar = document.querySelectorAll(".lang");
@@ -16,12 +14,11 @@ function changeLangIntro(language) {
     document.getElementById("intro").innerText = data[language]["intro"];
     document.getElementById("survey-header").innerText = data[language]["survey-header"];
     document.getElementById("aim").innerText = data[language]["aim"];
-    document.getElementById("desc-old").innerText = data[language]["desc-old"];
+    document.getElementById("desc").innerText = data[language]["desc"];
     document.getElementById("desc-det").innerText = data[language]["desc-det"];
     document.getElementById("refresh").innerText = data[language]["refresh"];
     document.getElementById("browsers").innerText = data[language]["browsers"];
     document.getElementById("agree-suv").innerText = data[language]["agree-suv"];
-    // document.getElementById("first-surv").innerText = data[language]["first-surv"];
 
 }
 

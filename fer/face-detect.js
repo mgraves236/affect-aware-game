@@ -1,7 +1,7 @@
 import {pred, labels, labelsPl} from "../main.js";
 // import {attr} from "../utils/language.js";
 
-let attr = "polish"
+let attr = "english"
 tf.setBackend('webgl');
 class Preprocess extends tf.layers.Layer {
     constructor(config) {
@@ -160,8 +160,8 @@ async function predictEmotion(img) {
     const max = Math.max(...predictedValue[0])
     // only get predictions that are almost certain
     // if (max >= 0.50) {
-        const index = predictedValue[0].indexOf(max)
-        res_label = index;
+    const index = predictedValue[0].indexOf(max)
+    res_label = index;
     // }
     return res_label;
 }

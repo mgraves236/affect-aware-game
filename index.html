@@ -7,46 +7,55 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection@0.0.1/dist/face-landmarks-detection.js"></script>
     <link rel="stylesheet" href="styles.css">
-    <!--    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@700&display=swap" rel="preload" as="style">-->
+<!--    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@700&display=swap" rel="preload" as="style">-->
 </head>
 <body>
-<!--<menu class="bar">-->
+<menu class="bar">
 <!--    <li class="lang" language="english">EN</li>-->
 <!--    <li class="lang" language="polish">PL</li>-->
-<!--</menu>-->
-<main class="column center">
-    <article>
-        <h1 id="hello">Witaj!</h1>
-        <p id="intro">Jestem studenką Zaufanych Systemów Sztucznej Inteligencji na Wydziale Informatyki i Telekomunikacji
-            na Politechnice Wrocławskiej, a ninejsze badanie jest częścią
-            mojej pracy magisterskiej. Aplikacja używa sztucznej inteligencji do rozpoznawania
-            emocji gracza na podstawie mimiki twarzy. Obraz pozyskiwany jest z kamery internetowej.
-            Rezultat jest wykorzystywany do dostosowania poziomu
-            trudności gry zgodnie z zidentyfikowaną emocją. Poziom gry obniża się, gdy gracz jest zdenerwowany,
-            smutny lub przestraszony, a podwyższa się, gdy gracz jest szczęśliwy. Wideo nie jest w żaden sposób nagrywane i przechowywane,
-            a fragmenty są używane tylko do indentyfikacji nastroju. Ładowanie modelu może trochę potrwać, dlatego
-            poczekaj aż pojawi się obraz video z kamery.</p>
+    <li id="show-video-component">
+        <input type="checkbox" id="show-video" name="show-video" value="true" checked>
+        <label for="show-video" id="show-video-label">Show video</label>
+    </li>
+    <li id="enable-emotion-component">
+        <input type="checkbox" id="enable-emotion" name="enable-emotion" value="true" checked>
+        <label for="enable-emotion" id="enable-emotion-label">Enable dynamic difficulty</label>
+    </li>
+    <li id="about" data-tooltip="The app uses artificial intelligence to recognize player's emotions based on their facial expression. The result is then used to tune the difficulty of the game according to the identified emotion.
 
-        <h1 id="survey-header">Badanie</h1>
-        <p id="aim">Badanie ma na celu sprawdzenie czy dynamiczna trudność gry zmieniana na podstawie emocji gracza
-            zapewnia lepsze doświadczenia użytkownika. Sprawdzane jest również czy technologia rozpoznawania
-            emocji z obrazów w różnych warunkach może być wykorzystana do implementacji gier wideo
-            reagujących na emocje użytkownika.</p>
-        <p id="desc-old">Badanie polega na zagraniu w grę Pong (1972) z włączoną dynamiczną trudnością ustalaną na podstawie emocji
-            czytanych z mimki twarzy gracza oraz z wyłączoną opcją rozpoznawania emocji. Gra polega na
-            poruszaniu paletką tak, aby odbić piłeczkę w ścianę po stronie gracza przeciwnego. Wygrywa gracz, który
-            pierwszy zdobędzie 11 punktów.</p>
-           <p id="desc-det" style="font-weight: bold"></p>
-<!--        <p id="first-surv" style="font-weight: bold"></p>-->
-        <p id="refresh">Jeśli video nie wyświetli się po wyrażeniu zgody na dostęp do kamery, odśwież stronę.</p>
-        <p id="browsers">Wspierane przeglądarki: Google Chrome, Microsoft Edge, Opera</p>
-        <div class="right">
-            <button id="agree-suv" onclick="location.href = 'app.html'">Zatwierdź</button>
+You can turn on and off dynamic difficulty at any point in the menu at the top of the website.  This way you can still challenge yourself! Moreover, the menu allows you to turn off the video preview.
+
+Watch the ball change colors to mirror your emotions! Pink is for happiness, yellow for fear, blue for being sad, red for being angry, and white is for being neutral.
+
+The image is obtained through a webcam. The video is not sent to a remote server, every computation is done within your web browser. Enjoy the game with full privacy!">About</li>
+<!--    <li id="survey"></li>-->
+</menu>
+<main>
+    <div class="center" style="position: fixed; z-index: 51; display: none;" id="webcam-alert-component">
+        <div class="dialog" id="webcam-alert">
+            <h1 id="webcam-head"></h1>
+            <hr>
+            <p id="webcam-desc"></p>
+            <div class="right">
+                <button id="agree"></button>
+                <button id="reject" style="display: none"></button>
+            </div>
         </div>
-    </article>
-
-
+    </div>
+    <div class="start">
+        <div id="webcam-component" class="column" >
+            <canvas id="canvas"></canvas>
+            <video style="visibility: hidden" id="webcam" autoplay></video>
+            <span id="predict"></span>
+        </div>
+        <canvas id="game-canvas"></canvas>
+    </div>
 </main>
+
 </body>
-<!--<script type="module" src="utils/language-intro.js"></script>-->
+<!--<script type="module" src="utils/language.js"></script>-->
+<script src="fer/webcam.js"></script>
+<script type="module" src="main.js"></script>
+<script type="module" src="fer/face-detect.js"></script>
+<script type="module" src="game/game-main.js"></script>
 </html>
